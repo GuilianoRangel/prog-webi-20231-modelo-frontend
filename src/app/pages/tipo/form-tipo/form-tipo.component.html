@@ -1,0 +1,44 @@
+
+<form
+  [formGroup]="formGroup"
+  (ngSubmit)="onSubmit()"
+  class="form"
+>
+  <div class="formTipo">
+  <mat-form-field>
+    <mat-label>Nome:</mat-label>
+    <input matInput formControlName="nome">
+    <mat-error *ngIf="handleError('nome', 'required')">
+      O nome do tipo é obrigatório
+    </mat-error>
+    <mat-error *ngIf="handleError('nome', 'minlength')">
+      Mínimo 3 caracteres
+    </mat-error>
+    <mat-error *ngIf="handleError('nome', 'maxlength')">
+      Máximo 50 caracteres
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Status:</mat-label>
+    <mat-select formControlName="status">
+      <mat-option value="ATIVO">Ativo</mat-option>
+      <mat-option value="INATIVO">Inativo</mat-option>
+    </mat-select>
+    <mat-error *ngIf="handleError('status', 'required')">
+      Status é obrigatório
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Data da Criação</mat-label>
+    <input matInput [matDatepicker]="picker" formControlName="dataCriacao">
+    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+    <mat-error *ngIf="handleError('dataCriacao', 'required')">
+      Status é obrigatório
+    </mat-error>
+  </mat-form-field>
+
+  <button mat-raised-button color="primary" type="submit">Salvar</button>
+</div>
+</form>
+
