@@ -98,7 +98,8 @@ export class TipoControllerService extends BaseService {
   },
   context?: HttpContext
 
-): Observable<StrictHttpResponse<string>> {
+): Observable<StrictHttpResponse<{
+}>> {
 
     const rb = new RequestBuilder(this.rootUrl, TipoControllerService.AlterarPath, 'put');
     if (params) {
@@ -113,7 +114,8 @@ export class TipoControllerService extends BaseService {
     })).pipe(
       filter((r: any) => r instanceof HttpResponse),
       map((r: HttpResponse<any>) => {
-        return r as StrictHttpResponse<string>;
+        return r as StrictHttpResponse<{
+        }>;
       })
     );
   }
@@ -132,10 +134,13 @@ export class TipoControllerService extends BaseService {
   },
   context?: HttpContext
 
-): Observable<string> {
+): Observable<{
+}> {
 
     return this.alterar$Response(params,context).pipe(
-      map((r: StrictHttpResponse<string>) => r.body as string)
+      map((r: StrictHttpResponse<{
+}>) => r.body as {
+})
     );
   }
 

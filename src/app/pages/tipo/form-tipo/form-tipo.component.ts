@@ -9,7 +9,8 @@ import {
 } from "../../../core/confirmation-dialog/confirmation-dialog.component";
 import {MatDialog} from "@angular/material/dialog";
 import {MatSnackBar} from "@angular/material/snack-bar";
-import {Router} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
+import {MessageResponse} from "../../../api/models/message-response";
 
 @Component({
   selector: 'app-form-tipo',
@@ -18,9 +19,15 @@ import {Router} from "@angular/router";
 })
 export class FormTipoComponent {
   formGroup!: FormGroup;
+  public readonly ACAO_INCLUIR = "Incluir";
+  public readonly ACAO_EDITAR = "Editar";
+
+  acao : string = this.ACAO_INCLUIR;
+  id!: number;
 
   constructor(
     private router: Router,
+    private route: ActivatedRoute,
     private formBuilder: FormBuilder,
     private _adapter: DateAdapter<any>,
     public tipoService: TipoControllerService,
@@ -28,6 +35,7 @@ export class FormTipoComponent {
   ) {
     this.createForm();
     this._adapter.setLocale('pt-br');
+    this.prepararEdicao();
   }
   createForm() {
     this.formGroup = this.formBuilder.group({
@@ -39,34 +47,83 @@ export class FormTipoComponent {
 
   onSubmit() {
     if (this.formGroup.valid) {
-      console.log("Dados:",this.formGroup.value);
-      this.tipoService.incluir({body: this.formGroup.value})
-        .subscribe( retorno =>{
-          console.log("Retorno:",retorno);
-        this.confirmarInclusao(retorno);
-        this.router.navigate(["/tipo"]);
-      }, erro =>{
-          console.log("Erro:"+erro);
-          alert("Erro ao incluir!");
-        })
+      if(!this.id){
+        this.realizarInclusao();
+      }else{
+        this.realizarEdicao();
+      }
     }
 
+  }
+
+  private realizarInclusao() {
+    console.log("Dados:", this.formGroup.value);
+    this.tipoService.incluir({body: this.formGroup.value})
+      .subscribe(retorno => {
+        console.log("Retorno:", retorno);
+        this.confirmarAcao(retorno, this.ACAO_INCLUIR);
+        this.router.navigate(["/tipo"]);
+      }, erro => {
+        console.log("Erro:" + erro);
+        this.showError(erro.error, this.ACAO_INCLUIR)
+      })
   }
 
   public handleError = (controlName: string, errorName: string) => {
     return this.formGroup.controls[controlName].hasError(errorName);
   };
 
-  confirmarInclusao(tipoDto: TipoDto) {
+  confirmarAcao(tipoDto: TipoDto, acao: string) {
     const dialogRef = this.dialog.open(ConfirmationDialog, {
       data: {
         titulo: 'Mensagem!!!',
-        mensagem: `Inclusão de: ${tipoDto.nome} (ID: ${tipoDto.id}) realiza com sucesso!`,
+        mensagem: `Ação de ${acao} dados: ${tipoDto.nome} (ID: ${tipoDto.id}) realizada com sucesso!`,
         textoBotoes: {
           ok: 'ok',
         },
       },
     });
 
+  }
+  showError(erro: MessageResponse, acao: string) {
+    const dialogRef = this.dialog.open(ConfirmationDialog, {
+      data: {
+        titulo: `Erro ao ${acao}`,
+        mensagem: erro.message,
+        textoBotoes: {
+          ok: 'ok',
+        },
+      },
+    });
+
+  }
+
+  private prepararEdicao() {
+    const paramId = this.route.snapshot.paramMap.get('codigo');
+    if (paramId){
+      const codigo = parseInt(paramId);
+      console.log("codigo",paramId);
+      this.tipoService.obterPorId({id: codigo}).subscribe(
+        retorno => {
+          this.acao = this.ACAO_EDITAR;
+          console.log("retorno", retorno);
+          this.id = retorno.id;
+          this.formGroup.patchValue(retorno);
+        }
+      )
+    }
+  }
+
+  private realizarEdicao() {
+    console.log("Dados:", this.formGroup.value);
+    this.tipoService.alterar({id: this.id, body: this.formGroup.value})
+      .subscribe(retorno => {
+        console.log("Retorno:", retorno);
+        this.confirmarAcao(retorno, this.ACAO_EDITAR);
+        this.router.navigate(["/tipo"]);
+      }, erro => {
+        console.log("Erro:", erro.error);
+        this.showError(erro.error, this.ACAO_EDITAR);
+      })
   }
 }
