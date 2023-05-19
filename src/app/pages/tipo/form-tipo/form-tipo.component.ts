@@ -9,6 +9,7 @@ import {
 } from "../../../core/confirmation-dialog/confirmation-dialog.component";
 import {MatDialog} from "@angular/material/dialog";
 import {MatSnackBar} from "@angular/material/snack-bar";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-form-tipo',
@@ -19,6 +20,7 @@ export class FormTipoComponent {
   formGroup!: FormGroup;
 
   constructor(
+    private router: Router,
     private formBuilder: FormBuilder,
     private _adapter: DateAdapter<any>,
     public tipoService: TipoControllerService,
@@ -42,6 +44,7 @@ export class FormTipoComponent {
         .subscribe( retorno =>{
           console.log("Retorno:",retorno);
         this.confirmarInclusao(retorno);
+        this.router.navigate(["/tipo"]);
       }, erro =>{
           console.log("Erro:"+erro);
           alert("Erro ao incluir!");
