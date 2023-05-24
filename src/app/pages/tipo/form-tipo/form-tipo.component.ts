@@ -108,6 +108,7 @@ export class FormTipoComponent {
           this.acao = this.ACAO_EDITAR;
           console.log("retorno", retorno);
           this.id = retorno.id;
+          retorno.dataCriacao = `${retorno.dataCriacao}T03:00:00.000Z`;
           this.formGroup.patchValue(retorno);
         }
       )
