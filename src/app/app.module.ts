@@ -16,12 +16,16 @@ import {MAT_FORM_FIELD_DEFAULT_OPTIONS} from "@angular/material/form-field";
 import {MatDialogModule} from "@angular/material/dialog";
 import { ConfirmationDialog } from './core/confirmation-dialog/confirmation-dialog.component';
 import {MatSnackBarModule} from "@angular/material/snack-bar";
+import {LoaderModule} from "./arquitetura/loader/loader.module";
+import {LoaderDialogComponent} from "./arquitetura/loader-dialog/loader-dialog.component";
+import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    ConfirmationDialog
+    ConfirmationDialog,
+    LoaderDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -33,9 +37,11 @@ import {MatSnackBarModule} from "@angular/material/snack-bar";
     MatButtonModule,
     MatIconModule,
     MatDividerModule,
+    LoaderModule,
     TipoModule,
     MatDialogModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatProgressSpinnerModule
   ],
   providers: [
     {provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'outline'}}
