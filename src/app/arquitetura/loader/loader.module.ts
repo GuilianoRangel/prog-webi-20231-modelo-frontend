@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { LoaderService } from './loader.service';
-import { LoaderComponent } from './loader.component';
 import { LoaderInterceptor } from './loader.interceptor';
 
 @NgModule({
@@ -11,9 +10,7 @@ import { LoaderInterceptor } from './loader.interceptor';
     CommonModule,
     HttpClientModule
   ],
-  declarations: [
-    LoaderComponent
-  ],
+  declarations: [],
   providers: [
     LoaderService,
     {
@@ -22,8 +19,6 @@ import { LoaderInterceptor } from './loader.interceptor';
       multi: true
     }
   ],
-  exports: [
-    LoaderComponent
-  ]
+  exports: []
 })
 export class LoaderModule { }
