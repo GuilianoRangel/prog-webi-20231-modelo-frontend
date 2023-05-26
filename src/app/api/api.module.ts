@@ -5,9 +5,6 @@ import { HttpClient } from '@angular/common/http';
 import { ApiConfiguration, ApiConfigurationParams } from './api-configuration';
 
 import { TipoControllerService } from './services/tipo-controller.service';
-import { LivroControllerService } from './services/livro-controller.service';
-import { Aluno2ControllerService } from './services/aluno-2-controller.service';
-import { AlunoControllerService } from './services/aluno-controller.service';
 
 /**
  * Module that provides all services and configuration.
@@ -18,9 +15,6 @@ import { AlunoControllerService } from './services/aluno-controller.service';
   declarations: [],
   providers: [
     TipoControllerService,
-    LivroControllerService,
-    Aluno2ControllerService,
-    AlunoControllerService,
     ApiConfiguration
   ],
 })

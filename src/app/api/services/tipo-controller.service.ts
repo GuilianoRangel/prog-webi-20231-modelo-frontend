@@ -25,7 +25,7 @@ export class TipoControllerService extends BaseService {
   /**
    * Path part for operation obterPorId
    */
-  static readonly ObterPorIdPath = '/api/v1/tipo/{id}';
+  static readonly ObterPorIdPath = '/api/v1/cad-tipo/{id}';
 
   /**
    * Obter os dados completos de uma entidiade pelo id informado!
@@ -82,7 +82,7 @@ export class TipoControllerService extends BaseService {
   /**
    * Path part for operation alterar
    */
-  static readonly AlterarPath = '/api/v1/tipo/{id}';
+  static readonly AlterarPath = '/api/v1/cad-tipo/{id}';
 
   /**
    * Método utilizado para altlerar os dados de uma entidiade
@@ -147,7 +147,7 @@ export class TipoControllerService extends BaseService {
   /**
    * Path part for operation remover
    */
-  static readonly RemoverPath = '/api/v1/tipo/{id}';
+  static readonly RemoverPath = '/api/v1/cad-tipo/{id}';
 
   /**
    * Método utilizado para remover uma entidiade pela id informado
@@ -202,66 +202,9 @@ export class TipoControllerService extends BaseService {
   }
 
   /**
-   * Path part for operation desativar
-   */
-  static readonly DesativarPath = '/api/v1/tipo/{id}';
-
-  /**
-   * Método utilizado para desativar Tipo
-   *
-   * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `desativar()` instead.
-   *
-   * This method doesn't expect any request body.
-   */
-  desativar$Response(params: {
-    id: number;
-  },
-  context?: HttpContext
-
-): Observable<StrictHttpResponse<TipoDto>> {
-
-    const rb = new RequestBuilder(this.rootUrl, TipoControllerService.DesativarPath, 'patch');
-    if (params) {
-      rb.path('id', params.id, {});
-    }
-
-    return this.http.request(rb.build({
-      responseType: 'json',
-      accept: 'application/json',
-      context: context
-    })).pipe(
-      filter((r: any) => r instanceof HttpResponse),
-      map((r: HttpResponse<any>) => {
-        return r as StrictHttpResponse<TipoDto>;
-      })
-    );
-  }
-
-  /**
-   * Método utilizado para desativar Tipo
-   *
-   * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `desativar$Response()` instead.
-   *
-   * This method doesn't expect any request body.
-   */
-  desativar(params: {
-    id: number;
-  },
-  context?: HttpContext
-
-): Observable<TipoDto> {
-
-    return this.desativar$Response(params,context).pipe(
-      map((r: StrictHttpResponse<TipoDto>) => r.body as TipoDto)
-    );
-  }
-
-  /**
    * Path part for operation listAll
    */
-  static readonly ListAllPath = '/api/v1/tipo';
+  static readonly ListAllPath = '/api/v1/cad-tipo';
 
   /**
    * Listagem Geral
@@ -315,7 +258,7 @@ export class TipoControllerService extends BaseService {
   /**
    * Path part for operation incluir
    */
-  static readonly IncluirPath = '/api/v1/tipo';
+  static readonly IncluirPath = '/api/v1/cad-tipo';
 
   /**
    * Método utilizado para realizar a inclusão de um entidade
@@ -366,6 +309,63 @@ export class TipoControllerService extends BaseService {
 
     return this.incluir$Response(params,context).pipe(
       map((r: StrictHttpResponse<any>) => r.body as any)
+    );
+  }
+
+  /**
+   * Path part for operation ativar
+   */
+  static readonly AtivarPath = '/api/v1/cad-tipo/{id}/ativar';
+
+  /**
+   * Método utilizado para ativar Tipo
+   *
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `ativar()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  ativar$Response(params: {
+    id: number;
+  },
+  context?: HttpContext
+
+): Observable<StrictHttpResponse<TipoDto>> {
+
+    const rb = new RequestBuilder(this.rootUrl, TipoControllerService.AtivarPath, 'patch');
+    if (params) {
+      rb.path('id', params.id, {});
+    }
+
+    return this.http.request(rb.build({
+      responseType: 'json',
+      accept: 'application/json',
+      context: context
+    })).pipe(
+      filter((r: any) => r instanceof HttpResponse),
+      map((r: HttpResponse<any>) => {
+        return r as StrictHttpResponse<TipoDto>;
+      })
+    );
+  }
+
+  /**
+   * Método utilizado para ativar Tipo
+   *
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `ativar$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  ativar(params: {
+    id: number;
+  },
+  context?: HttpContext
+
+): Observable<TipoDto> {
+
+    return this.ativar$Response(params,context).pipe(
+      map((r: StrictHttpResponse<TipoDto>) => r.body as TipoDto)
     );
   }
 
