@@ -1,0 +1,36 @@
+<mat-dialog-content>
+  <h3>
+    {{item.msg}}
+  </h3>
+</mat-dialog-content>
+<mat-dialog-actions align="center" *ngIf="item.isConfirmTypeYesNo()">
+  <button
+    title="Não"
+    (click)="onConfirmNo()"
+    mat-dialog-close
+    mat-raised-button
+    tabindex="-1"
+  >
+    <span>Não</span>
+  </button>
+  <button
+    title="Sim"
+    (click)="onConfirmYesOk()"
+    mat-raised-button
+    color="primary"
+    tabindex="1"
+  >
+    <span>Sim</span>
+  </button>
+</mat-dialog-actions>
+<mat-dialog-actions align="center" *ngIf="item.isConfirmTypeOk()">
+  <button
+    title="Ok"
+    (click)="onConfirmYesOk()"
+    mat-raised-button
+    color="primary"
+    tabindex="1"
+  >
+    <span>Ok</span>
+  </button>
+</mat-dialog-actions>

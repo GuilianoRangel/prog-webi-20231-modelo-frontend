@@ -3,14 +3,9 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {DateAdapter} from "@angular/material/core";
 import {TipoControllerService} from "../../../api/services/tipo-controller.service";
 import {TipoDto} from "../../../api/models/tipo-dto";
-import {
-  ConfirmationDialog,
-  ConfirmationDialogResult
-} from "../../../core/confirmation-dialog/confirmation-dialog.component";
 import {MatDialog} from "@angular/material/dialog";
-import {MatSnackBar} from "@angular/material/snack-bar";
 import {ActivatedRoute, Router} from "@angular/router";
-import {MessageResponse} from "../../../api/models/message-response";
+import {Message, MessageService} from "../../../arquitetura/message/message.service";
 
 @Component({
   selector: 'app-form-tipo',
@@ -32,6 +27,7 @@ export class FormTipoComponent {
     private _adapter: DateAdapter<any>,
     public tipoService: TipoControllerService,
     private dialog: MatDialog,
+    private messageService: MessageService
   ) {
     this.createForm();
     this._adapter.setLocale('pt-br');
@@ -64,8 +60,8 @@ export class FormTipoComponent {
         this.confirmarAcao(retorno, this.ACAO_INCLUIR);
         this.router.navigate(["/tipo"]);
       }, erro => {
-        console.log("Erro:" + erro);
-        this.showError(erro.error, this.ACAO_INCLUIR)
+        console.log("Erro:" , erro);
+        this.showError(erro, this.ACAO_INCLUIR)
       })
   }
 
@@ -74,28 +70,10 @@ export class FormTipoComponent {
   };
 
   confirmarAcao(tipoDto: TipoDto, acao: string) {
-    const dialogRef = this.dialog.open(ConfirmationDialog, {
-      data: {
-        titulo: 'Mensagem!!!',
-        mensagem: `Ação de ${acao} dados: ${tipoDto.nome} (ID: ${tipoDto.id}) realizada com sucesso!`,
-        textoBotoes: {
-          ok: 'ok',
-        },
-      },
-    });
-
+    this.messageService.addMsgSuccess(`Ação de ${acao} dados: ${tipoDto.nome} (ID: ${tipoDto.id}) realizada com sucesso!`);
   }
-  showError(erro: MessageResponse, acao: string) {
-    const dialogRef = this.dialog.open(ConfirmationDialog, {
-      data: {
-        titulo: `Erro ao ${acao}`,
-        mensagem: erro.message,
-        textoBotoes: {
-          ok: 'ok',
-        },
-      },
-    });
-
+  showError(erro: Message, acao: string) {
+    this.messageService.addConfirmOk(`Erro ao ${acao}, Mensagem: ${erro.message}`);
   }
 
   private prepararEdicao() {
@@ -110,6 +88,9 @@ export class FormTipoComponent {
           this.id = retorno.id;
           retorno.dataCriacao = `${retorno.dataCriacao}T03:00:00.000Z`;
           this.formGroup.patchValue(retorno);
+        },error => {
+          console.log("erro", error);
+          this.messageService.addMsgWarning(`Erro ao buscar ID: ${codigo}, mensagem: ${error.message}`);
         }
       )
     }
@@ -124,7 +105,7 @@ export class FormTipoComponent {
         this.router.navigate(["/tipo"]);
       }, erro => {
         console.log("Erro:", erro.error);
-        this.showError(erro.error, this.ACAO_EDITAR);
+        this.showError(erro, this.ACAO_EDITAR);
       })
   }
 }

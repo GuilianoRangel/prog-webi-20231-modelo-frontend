@@ -5,6 +5,7 @@ import {BreakpointObserver} from "@angular/cdk/layout";
 import {NavigationEnd, Router} from "@angular/router";
 import {delay} from "rxjs";
 import {filter} from "rxjs/operators";
+import {SecurityService} from "../../arquitetura/security/security.service";
 
 
 @UntilDestroy()
@@ -17,7 +18,10 @@ export class HomeComponent {
   @ViewChild(MatSidenav)
   sidenav!: MatSidenav;
 
-  constructor(private observer: BreakpointObserver, private router: Router) {
+  constructor(
+    private observer: BreakpointObserver,
+    private router: Router,
+    private securityService: SecurityService) {
   }
 
   ngAfterViewInit() {
@@ -44,5 +48,10 @@ export class HomeComponent {
           this.sidenav.close();
         }
       });
+  }
+
+  sair() {
+    this.securityService.invalidate();
+    this.router.navigate(['/acesso']);
   }
 }

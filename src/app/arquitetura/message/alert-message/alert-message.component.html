@@ -1,0 +1,13 @@
+<div class="alert-message" *ngIf="show">
+  <div>
+    <div class="item-message"*ngFor="let item of items" (click)="removeMsg(item)">
+      <button mat-button class="menu-button">
+        <mat-icon>{{item.type}}</mat-icon>
+        <span>{{item.msg}}</span>
+      </button>
+    </div>
+  </div>
+  <div class="acoes">
+    <button mat-button (click)="fecharToast()"><mat-icon>close</mat-icon></button>
+ </div>
+</div>

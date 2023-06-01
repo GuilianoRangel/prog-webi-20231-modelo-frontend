@@ -1,0 +1,40 @@
+/* ------------- Message ------------- */
+.alert-message {
+  padding: 10px;
+	top: 40px;
+  left: 40%;
+  width: 50%;
+  z-index: 1060;
+  position: fixed;
+  display: flex;
+  background-color: #009f9f;
+  color: white;
+  opacity: 0.9;
+  display: flex;
+  flex-direction: row;
+  place-content: center;
+  align-items: center;
+}
+.item-message{
+  display: block;
+  float: left;
+  width: 100%;
+}
+
+.acoes{
+  display: block;
+  float: right;
+}
+
+.menu-button {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  font-size: 1rem;
+  color: white !important;
+
+  mat-icon {
+    margin-right: 8px;
+  }
+}

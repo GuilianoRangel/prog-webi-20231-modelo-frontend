@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { ApiConfiguration, ApiConfigurationParams } from './api-configuration';
 
 import { TipoControllerService } from './services/tipo-controller.service';
+import { AuthApiService } from './services/auth-api.service';
 
 /**
  * Module that provides all services and configuration.
@@ -15,6 +16,7 @@ import { TipoControllerService } from './services/tipo-controller.service';
   declarations: [],
   providers: [
     TipoControllerService,
+    AuthApiService,
     ApiConfiguration
   ],
 })

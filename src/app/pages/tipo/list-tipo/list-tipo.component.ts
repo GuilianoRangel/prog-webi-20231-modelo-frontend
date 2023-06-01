@@ -5,10 +5,7 @@ import {TipoControllerService} from "../../../api/services/tipo-controller.servi
 import {MessageResponse} from "../../../api/models/message-response";
 import {MatDialog} from "@angular/material/dialog";
 import {MatSnackBar} from "@angular/material/snack-bar";
-import {
-  ConfirmationDialog,
-  ConfirmationDialogResult
-} from "../../../core/confirmation-dialog/confirmation-dialog.component";
+import {MessageService} from "../../../arquitetura/message/message.service";
 
 @Component({
   selector: 'app-list-tipo',
@@ -22,7 +19,8 @@ export class ListTipoComponent implements OnInit {
   constructor(
     public tipoService: TipoControllerService,
     private dialog: MatDialog,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private messageService: MessageService
   ) {
   }
 
@@ -41,13 +39,13 @@ export class ListTipoComponent implements OnInit {
     this.tipoService.remover({id: tipoDto.id || 0})
       .subscribe(retorno => {
           this.buscarDados();
-          this.showMensagemSimples("Excluído com sucesso ",5000);
+          this.messageService.addMsgSuccess(`Tipo: ${retorno.nome} Excluído com sucesso!!!`);
           console.log("Exlcusão:", retorno);
         }, error => {
           if (error.status === 404) {
-            this.showMensagemSimples("Tipo não existe mais")
+            this.messageService.addMsgInf("Tipo não existe mais")
           } else {
-            this.showMensagemSimples("Erro ao excluir");
+            this.messageService.addMsgDanger("Erro ao excluir");
             console.log("Erro:", error);
           }
         }
@@ -55,7 +53,10 @@ export class ListTipoComponent implements OnInit {
   }
 
   confirmarExcluir(tipoDto: TipoDto) {
-    const dialogRef = this.dialog.open(ConfirmationDialog, {
+    this.messageService.addConfirmYesNo(`Confirmar a exclusão de: ${tipoDto.nome} (ID: ${tipoDto.id})?`,() => {
+      this.remover(tipoDto);
+    });
+    /*const dialogRef = this.dialog.open(ConfirmationDialog, {
       data: {
         titulo: 'Confirmar?',
         mensagem: `A exclusão de: ${tipoDto.nome} (ID: ${tipoDto.id})?`,
@@ -71,13 +72,6 @@ export class ListTipoComponent implements OnInit {
       if (confirmed?.resultado) {
         this.remover(confirmed.dado);
       }
-    });
-  }
-  showMensagemSimples( mensagem: string, duracao: number = 2000) {
-    this.snackBar.open(mensagem, 'Fechar', {
-      duration: duracao,
-      horizontalPosition: 'center',
-      verticalPosition: 'top',
-    });
+    });*/
   }
 }
