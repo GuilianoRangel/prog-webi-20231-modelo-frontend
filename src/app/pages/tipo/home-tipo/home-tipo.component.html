@@ -3,7 +3,8 @@
     <mat-card-title>Manter Tipo</mat-card-title>
   </mat-card-header>
   <mat-card-actions>
-    <button mat-raised-button color="primary" [routerLink]="['/tipo','novo']">
+    <button mat-raised-button color="primary" [routerLink]="['/tipo','novo']"
+            *ngIf="securityService.hasRoles('ROLE_TIPO_INCLUIR')">
       <mat-icon>add</mat-icon>
       <span>Adicionar</span>
     </button>
