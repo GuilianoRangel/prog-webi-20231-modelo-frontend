@@ -44,7 +44,7 @@ export class AppComponent implements  OnInit{
         this.securityService.init(user);
       }, error => {
         console.log(error);
-        alert(error);
+        this.messageService.addMsgInf(error);
       });
     });
 
