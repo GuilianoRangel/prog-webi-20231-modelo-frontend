@@ -1,0 +1,189 @@
+@use 'sass:map';
+@use '@angular/material' as mat;
+
+@import 'variables';
+
+@include mat.core();
+
+$my-typography: mat.define-typography-config(
+  $font-family: '-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji"',
+  $headline-1: mat.define-typography-level(1.5em, 1.75em, 700),
+  $body-1: mat.define-typography-level(1em, 1em, 300),
+  $button: mat.define-typography-level(0.9em, 1.75em, 600)
+);
+
+$primary-palette: mat.$indigo-palette;
+
+//$primary: mat-palette($mat-deep-purple);
+$my-primary: mat.define-palette($primary-palette,600);
+//#0a8396
+//02a2bb
+//$accent: mat-palette($mat-green);
+$my-accent: mat.define-palette($primary-palette,800);
+
+$ueg-color-dark: #000445;
+$ueg-color-light: #1C347E;
+//$theme-background: radial-gradient( circle,$ueg-color-light, $ueg-color-dark);
+$theme-background: radial-gradient( circle,mat.get-color-from-palette($my-primary,800), mat.get-color-from-palette($my-primary,900));
+$theme-background-solid: #eee;
+
+$my-theme: mat.define-light-theme((
+  color: (
+    primary: $my-primary,
+    accent: $my-accent,
+  ),
+  typography: $my-typography,
+));
+
+@include mat.all-component-themes($my-theme);
+
+
+/* == customizações do tema diretamente no css */
+/* ==== mat-card ====== */
+.mat-card-title {
+  font-size: 1.5rem;
+}
+
+.mat-raised-button{
+  color: white !important;
+}
+
+.mat-cell{
+  padding: 0.3em;
+}
+
+.mat-card-footer {
+   margin: 0;
+}
+
+.mat-expansion-panel-header{
+  background: mat.get-color-from-palette($my-primary,default,0.05);
+}
+.mat-expansion-panel-header.mat-expanded{
+  background: mat.get-color-from-palette($my-primary,default,0.1);
+}
+
+
+// ---
+/* You can add global styles to this file, and also import other style files */
+/* ==================== Layout ==================== */
+body, div.wrapper {
+  // font-size: 0.9em;
+  min-height:100vh;
+  margin: 0;
+
+}
+
+.container {
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.page-content {
+  padding: 20px 40px;
+}
+
+.content__title {
+  font-size: 1.5rem !important;
+  font-weight: 600 !important;
+  opacity: 0.7 !important;
+}
+
+main {
+  background: $theme-background-solid;
+}
+/* ---- variaveis do bootstrap para compatiblidade */
+.d-block {
+  display: block !important;
+}
+
+.ml-1,
+.mx-1 {
+  margin-left: 0.25rem !important;
+}
+
+.ml-2,
+.mx-2 {
+  margin-left: 0.5rem !important;
+}
+/* ==================== FIM Layout ==================== */
+
+.icon-gray{
+  color: #212529;
+  opacity: 0.5;
+}
+
+.font-color{
+  color: #212529;
+}
+
+.icon-lg{
+  font-size: 3em;
+}
+
+.icon-white{
+  color: #fff;
+}
+
+
+
+/* ==================== Formulário ==================== */
+.required-label{
+  color: red;
+  text-align: right;
+  font-size: 0.7em;
+  margin-bottom: 0;
+}
+
+.required::before{
+  content: '* ';
+  color: red;
+}
+
+mat-card{
+  padding: 5px;
+}
+
+.mat-button-wrapper{
+  .mat-icon {
+    vertical-align: top !important;
+    padding-left: 1px;
+  }
+}
+
+
+.style-header{
+  font-weight: bold;
+  background-color: $theme-background-solid !important;
+}
+
+.f{
+  border-right: none;
+}
+.text-right{
+  text-align: right;
+}
+.style-column{
+  border-right: 1px #e7e5e5 solid;
+}
+
+.filter-position{
+  margin:3px;
+}
+
+.table-detail{
+  margin-top: 10px;
+  border: 1px #e7e5e5 solid;
+}
+
+.mat-row-lt-sm{
+  min-height: 0;
+}
+mat-row{
+  height: fit-content !important;
+}
+
+

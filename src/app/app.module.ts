@@ -23,6 +23,11 @@ import {SecurityModule} from "./arquitetura/security/security.module";
 import {SecurityInterceptor} from "./arquitetura/security/security.interceptor";
 import {MessageModule} from "./arquitetura/message/message.module";
 import {AppInterceptor} from "./arquitetura/app.interceptor";
+import {MaterialModule} from "./adminmodule/layouts/material.module";
+import {AdministracaoModule} from "./adminmodule/administracao.module";
+import {provideNgxMask} from "ngx-mask";
+import {ValidationResourceProvider} from "./adminmodule/shared/validation/validation.resource";
+import {AppMessage} from "./adminmodule/app.message";
 
 @NgModule({
   declarations: [
@@ -35,16 +40,10 @@ import {AppInterceptor} from "./arquitetura/app.interceptor";
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    MatToolbarModule,
-    MatSidenavModule,
-    MatButtonModule,
-    MatIconModule,
-    MatDividerModule,
+    MaterialModule,
+    AdministracaoModule,
     LoaderModule,
     TipoModule,
-    MatDialogModule,
-    MatSnackBarModule,
-    MatProgressSpinnerModule,
     AutenticacaoModule,
     MessageModule.forRoot(),
     SecurityModule,//TODO conferir a configuração
@@ -65,6 +64,10 @@ import {AppInterceptor} from "./arquitetura/app.interceptor";
       useClass: SecurityInterceptor,
       multi: true
     },
+    {
+      provide: ValidationResourceProvider,
+      useValue: AppMessage,
+    }
   ],
   bootstrap: [AppComponent]
 })

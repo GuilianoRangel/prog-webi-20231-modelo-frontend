@@ -1,0 +1,143 @@
+<div fxLayout="column" fxLayoutGap="1.5%" fxLayoutGap.xs="2%">
+
+  <div fxLayout="row">
+    <div class="content__title" fxFlex fxFlexAlign="center">
+      <span *ngIf="acaoSistema.isAcaoAlterar()">Alterar Grupo</span>
+      <span *ngIf="acaoSistema.isAcaoIncluir()">Incluir Grupo</span>
+      <span *ngIf="acaoSistema.isAcaoVisualizar()">Visualizar Grupo</span>
+    </div>
+  </div>
+
+  <form #formGrupo="ngForm">
+    <mat-card fxLayout="column" fxLayoutGap="1%" fxLayoutGap.xs="2%">
+      <mat-card fxLayout="column" fxLayoutGap="1%" fxLayoutGap.xs="2%">
+        <mat-card-title>
+          <span>Dados do Grupo</span>
+        </mat-card-title>
+        <mat-card-content fxLayout="column" fxLayoutGap="0.7%" fxLayoutGap.xs="3%">
+
+          <div fxLayout="row">
+            <mat-form-field fxFlex>
+              <mat-label>Nome</mat-label>
+              <input matInput placeholder="Informe o Nome" title="Grupo"
+                     [(ngModel)]="grupo.nome" name="nome"  required maxlength="50"
+                     [disabled]="acaoSistema.isAcaoVisualizar()"
+              >
+              <mat-error validationMessage [submitted]="submitted"></mat-error>
+            </mat-form-field>
+            <div fxFlex.gt-sm="15" fxFlex.sm="25" fxFlex.lt-sm="75px" fxLayout="row" fxFlexOffset="1%"
+                 *ngIf="acaoSistema.isAcaoAlterar() || acaoSistema.isAcaoVisualizar()" fxLayoutAlign="center center">
+              <mat-label>Ativo:</mat-label>
+              <mat-slide-toggle [checked]="grupo.status"
+                                [disabled]="acaoSistema.isAcaoVisualizar() || !securityService.hasRoles('ROLE_GRUPO_ATIVAR_INATIVAR')"
+                                (change)="alterarStatus(grupo)"
+                                title="{{ (grupo.status ? 'Ativo' : 'Inativo') }}"
+              >
+              </mat-slide-toggle>
+            </div>
+          </div>
+
+          <div fxLayout="row">
+            <mat-form-field fxFlex>
+              <mat-label>Descrição</mat-label>
+              <textarea matInput placeholder="Informe a Descrição"
+                        title="Descrição"
+                        [(ngModel)]="grupo.descricao" name="descricao" #nomeControl="ngModel" required maxlength="500"
+                        rows="2"
+                        [disabled]="acaoSistema.isAcaoVisualizar()"
+              ></textarea>
+              <mat-error validationMessage [submitted]="submitted"></mat-error>
+            </mat-form-field>
+          </div>
+        </mat-card-content>
+      </mat-card>
+
+      <mat-card fxLayout="column" fxLayoutGap="1%" fxLayoutGap.xs="2%">
+        <mat-card-title>
+          <span>Permissões</span>
+        </mat-card-title>
+        <mat-card-content fxLayout="column" fxLayoutGap="0.7%" fxLayoutGap.xs="3%">
+
+          <div fxLayout="row" fxLayoutAlign.gt-xs="center end" fxLayout.lt-sm="column">
+            <mat-form-field fxFlex.gt-xs="30" fxFlex.lt-sm="100" fxFlexOffset.gt-xs="1">
+              <mat-label>Módulo</mat-label>
+              <input matInput placeholder="Informe o Módulo" title="Módulo" name="filtroModulo"
+                     [(ngModel)]="filtroModulo" (keyup)="filtrarModulo(filtroModulo)"  maxlength="100"
+              >
+            </mat-form-field>
+          </div>
+          <div fxLayout="row wrap" fxFlexAlign="start center" fxLayoutGap="1%">
+            <mat-card *ngFor="let modulo of modulosFiltrados; let index = index;" fxFlex.lt-md="100" fxFlex.gt-sm="32">
+              <mat-card-content>
+                <div fxLayout="row wrap">
+                  <div fxLayout="row" fxFlex="50%" fxLayoutAlign="start center" >
+                    <h2>{{modulo.nome}}</h2>
+                  </div>
+                  <div fxLayout="row" fxFlex="50%" fxLayoutAlign="end center" fxLayoutGap="5%">
+                    <div>Todos:</div>
+                    <mat-slide-toggle
+                      [checked]="modulo.todosChecked"
+                      (ngModelChange)="checkFuncionalidadesModulo(modulo.id)"
+                      [disabled]="acaoSistema.isAcaoVisualizar()"
+                      [(ngModel)]="modulo.todosChecked"
+                      [name]="'relatorioAph.ferimentosDTO['+index+'][houveFerimento]'"
+                      title="{{ (modulo.todosChecked ? 'Ativo' : 'Inativo') }}">
+                    </mat-slide-toggle>
+                  </div>
+                </div>
+
+                <div >
+                  <div fxLayout="row" [style.margin-bottom]="'5px'" fxLayoutAlign="space-between center"
+                       *ngFor="let funcionalidade of modulo.funcionalidades">
+                    <div>
+                      <label>{{funcionalidade.nome}}</label>
+                    </div>
+                    <mat-slide-toggle
+                      [disabled]="acaoSistema.isAcaoVisualizar()"
+                      [checked]="funcionalidade.checked"
+                      [name]="'func_'+funcionalidade.id"
+                      [(ngModel)]="funcionalidade.checked"
+                      [id]="'func_'+funcionalidade.id"
+                      (ngModelChange)="atualizarFuncionalidades(modulo.id, funcionalidade)"
+                      title="{{ (funcionalidade.checked ? 'Ativo' : 'Inativo') }}"
+                    >
+                    </mat-slide-toggle>
+                  </div>
+                </div>
+                <mat-card-footer>
+                </mat-card-footer>
+              </mat-card-content>
+            </mat-card>
+          </div>
+        </mat-card-content>
+      </mat-card>
+      <mat-card-footer fxLayout="column" fxLayoutGap="1%" fxLayoutGap.xs="2%">
+        <div fxLayout="row" fxFlex="100" fxLayoutAlign="end center">
+          <div fxFlex.gt-sm="30" fxFlex.sm="50" fxFlex.lt-sm="100" fxFlexAlign="space-between"
+               fxLayoutAlign="end center">
+            <a title="Voltar" (click)="cancelar()" fxFlex fxFlexOffset="1"
+               mat-button mat-raised-button class="mat-primary"
+               *ngIf="acaoSistema.isAcaoVisualizar()"
+            >
+              <span>Voltar</span>
+            </a>
+            <a title="Cancelar" (click)="cancelar()" fxFlex fxFlexOffset="1"
+               mat-button mat-raised-button class="mat-warn"
+               *ngIf="!acaoSistema.isAcaoVisualizar()"
+            >
+              <span>Cancelar</span>
+            </a>
+            <button type="submit" title="Salvar" (click)="salvar(grupo, formGrupo)"
+                    fxFlex fxFlexOffset="1"
+                    mat-button mat-raised-button class="mat-primary"
+                    *ngIf="acaoSistema.isAcaoAlterar() || acaoSistema.isAcaoIncluir()"
+            >
+              <span>Salvar</span>
+            </button>
+          </div>
+        </div>
+      </mat-card-footer>
+
+    </mat-card>
+  </form>
+</div>

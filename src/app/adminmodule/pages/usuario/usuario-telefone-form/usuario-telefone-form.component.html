@@ -1,0 +1,144 @@
+<mat-card fxLayout="column" fxLayoutGap="1%" fxLayoutGap.xs="2%">
+  <mat-card-title>
+    <span>Telefones</span>
+  </mat-card-title>
+  <mat-card-content fxLayout="column" fxLayoutGap="0.7%" fxLayoutGap.xs="3%">
+
+    <div fxLayout="row" fxLayoutAlign.gt-xs="center end" fxLayout.lt-sm="column" *ngIf="!acaoSistema.isAcaoVisualizar()">
+      <div fxFlex fxLayoutAlign="end center">
+        <button mat-button mat-raised-button class="mat-accent" type="button"
+                title="Adicionar Telefone" (click)="openDialogTelefone(dialogTelefone)">
+          Adicionar Telefone
+        </button>
+      </div>
+    </div>
+
+    <div fxLayout="column" fxFlex="100"*ngIf="dataSourceTelefones.data.length != 0">
+
+      <div class="table-detail">
+        <mat-table #table [dataSource]="dataSourceTelefones">
+
+          <ng-container matColumnDef="tipoTelefone">
+            <mat-header-cell class="style-header" fxHide.xs="true" fxLayoutAlign="center center" *matHeaderCellDef> Tipo Telefone </mat-header-cell>
+            <mat-cell fxFlex.lt-sm="100" ngClass.gt-sm="style-column" fxLayoutAlign="start center" *matCellDef="let element">
+              <div fxFlex fxLayout="row">
+                <div fxFlex="80px" fxHide.gt-xs="true" fxLayoutAlign="center end">
+                  <span  class="mat-body-strong" >Tipo Telefone :</span>
+                </div>
+                <div >
+                  {{element.descricaoTipo}}
+                </div>
+              </div>
+            </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="ddd">
+            <mat-header-cell class="style-header" fxHide.xs="true" fxLayoutAlign="center center" *matHeaderCellDef> DDD </mat-header-cell>
+            <mat-cell fxFlex.lt-sm="100" ngClass.gt-sm="style-column" fxLayoutAlign="start center" *matCellDef="let element">
+              <div fxFlex fxLayout="row">
+                <div fxFlex="80px" fxHide.gt-xs="true" fxLayoutAlign="center end">
+                  <span  class="mat-body-strong" >DDD :</span>
+                </div>
+                <div >
+                  {{element.ddd}}
+                </div>
+              </div>
+            </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="numeroTelefone">
+            <mat-header-cell class="style-header" fxHide.xs="true" fxLayoutAlign="center center" *matHeaderCellDef> Número </mat-header-cell>
+            <mat-cell fxFlex.lt-sm="100" ngClass.gt-sm="style-column" fxLayoutAlign="start center" *matCellDef="let element">
+              <div fxFlex fxLayout="row">
+                <div fxFlex="80px" fxHide.gt-xs="true" fxLayoutAlign="center end">
+                  <span  class="mat-body-strong" >Número :</span>
+                </div>
+                <div >
+                  {{element.numero | mask: element.numero.length > 8 ? '00000-0000' : '0000-0000'}}
+                </div>
+              </div>
+            </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="remover" *ngIf="!acaoSistema.isAcaoVisualizar()">
+            <mat-header-cell fxFlex.gt-sm="100px" class="style-header f" fxLayoutAlign="center center" *matHeaderCellDef> Remover </mat-header-cell>
+            <mat-cell fxFlex.lt-sm="100"  fxLayoutAlign="center center"  fxFlex.gt-sm="100px"
+                      *matCellDef="let element">
+              <div fxFlex fxLayout="row" fxLayout.lt-sm="column" fxLayoutAlign="center center">
+                <div  fxHide.gt-xs="true" fxLayoutAlign="center end">
+                  <span  class="mat-body-strong" >Remover :</span>
+                </div>
+                <div fxLayout="row" fxLayoutAlign="center center">
+                  <a mat-mini-fab title="Remover Telefone" class="btn-primary"
+                     (click)="removerTelefone(element)">
+                    <mat-icon>delete</mat-icon>
+                  </a>
+                </div>
+              </div>
+            </mat-cell>
+          </ng-container>
+
+          <mat-header-row *matHeaderRowDef="displayedColumns" fxHide.lt-sm="true"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns;" fxLayout.lt-sm="column" fxLayout="row"
+                   fxLayoutAlign.lt-sm="space-around stretch"
+                   ngClass.lt-sm="mat-row-lt-sm"
+          ></mat-row>
+
+        </mat-table>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>
+
+<ng-template #dialogTelefone>
+  <div fxLayout="column" fxLayoutGap="1%" fxLayoutGap.xs="2%">
+    <form #formTelefone="ngForm">
+      <div mat-dialog-title>
+        <span>Adicionar Telefone</span>
+      </div>
+      <div fxLayout="row" fxLayoutAlign.gt-xs="center end" fxLayout.lt-sm="column" fxLayoutGap="0.7%">
+        <mat-form-field fxFlex="30">
+          <mat-select id="inputTipoTelefone" placeholder="Tipo Telefone" required
+                      title="Sistema" name="tipoTelefone" [(ngModel)]="telefoneInclusao.tipo"
+          >
+            <mat-option [value]="undefined">Selecione</mat-option>
+            <mat-option *ngFor="let tipoTelefone of listTiposTelefones" [value]="tipoTelefone">
+              {{tipoTelefone.descricao}}
+            </mat-option>
+          </mat-select>
+          <mat-error validationMessage [submitted]="submitted"></mat-error>
+        </mat-form-field>
+
+        <mat-form-field fxFlex="20">
+          <mat-label>DDD</mat-label>
+          <input matInput placeholder="Informe o DDD" title="DDD"
+                 [(ngModel)]="telefoneInclusao.ddd" name="ddd" required maxlength="5" mask="00"
+                 (focusout)="telefoneInclusao.ddd = telefoneInclusao.ddd === undefined || telefoneInclusao.ddd.length != 2 ? undefined : telefoneInclusao.ddd"
+          >
+          <mat-error validationMessage [submitted]="submitted"></mat-error>
+        </mat-form-field>
+
+        <mat-form-field fxFlex="50">
+          <mat-label>Número</mat-label>
+          <input matInput placeholder="Informeo Número" title="Número"
+                 [(ngModel)]="telefoneInclusao.numero" name="telefone" required maxlength="11"
+                 [mask]="telefoneMask" (ngModelChange)="onTelefoneChange()"
+                 (focusout)="telefoneInclusao.numero = telefoneInclusao.numero === undefined || telefoneInclusao.numero.length < 8 ? undefined : telefoneInclusao.numero"
+          >
+          <mat-error validationMessage [submitted]="submitted"></mat-error>
+        </mat-form-field>
+      </div>
+
+      <div fxLayoutAlign="end" fxLayoutGap="1%" fxLayoutGap.xs="2%">
+        <button type="button" title="Cancelar" (click)="closeDialogs()"
+                mat-button mat-raised-button class="mat-warn">
+          <span>Cancelar</span>
+        </button>
+        <button title="Adicionar" (click)="adicionarTelefone(telefoneInclusao, formTelefone)"
+                mat-button mat-raised-button class="mat-primary">
+          <span>Adicionar</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</ng-template>

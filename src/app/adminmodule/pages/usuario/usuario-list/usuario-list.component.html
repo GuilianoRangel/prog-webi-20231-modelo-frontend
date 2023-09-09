@@ -1,0 +1,185 @@
+<div fxLayout="column" fxLayoutGap="1%" fxLayoutGap.xs="2%">
+
+  <div fxLayout="row">
+    <div fxFlex fxFlexAlign="center">
+      <span class="content__title">Pesquisar Usuários</span>
+    </div>
+    <div fxFlex fxLayoutAlign="end center">
+      <button mat-button mat-raised-button class="mat-accent"
+              title="Adicionar" routerLink="/administracao/usuario/incluir"
+              *ngIf="securityService.hasRoles('ROLE_USUARIO_INCLUIR')">
+        Adicionar
+      </button>
+    </div>
+  </div>
+
+  <mat-card>
+    <mat-card-title>Filtro para Pesquisa</mat-card-title>
+    <mat-card-content fxLayout="column">
+      <div fxLayout="row" fxLayoutAlign.gt-xs="center end" fxLayout.lt-sm="column">
+        <mat-form-field fxFlex fxFlex.gt-xs="70" fxFlex.lt-sm="100">
+          <mat-label>Nome</mat-label>
+          <input matInput placeholder="Informe o nome do usuário" title="Nome"
+                 [(ngModel)]="filtroDTO.nome" maxlength="100">
+        </mat-form-field>
+        <mat-form-field fxFlex.gt-xs="30" fxFlex.lt-sm="100" fxFlexOffset.gt-xs="1">
+          <mat-label>Status</mat-label>
+          <mat-select placeholder="Status" title="Status"
+                      [(ngModel)]="filtroDTO.ativo">
+            <mat-option [value]="undefined">Status</mat-option>
+            <mat-option *ngFor="let statusAtivoInativo of listStatusAtivosInativos" [value]="statusAtivoInativo.id">
+              {{statusAtivoInativo.descricao}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div fxLayout="row" fxLayoutAlign.gt-xs="center end" fxLayout.lt-sm="column">
+        <mat-form-field fxFlex fxFlex.gt-xs="70" fxFlex.lt-sm="100">
+          <mat-label>Login</mat-label>
+          <input matInput placeholder="Informe o Login" title="Login"
+                 [(ngModel)]="filtroDTO.login" maxlength="15">
+        </mat-form-field>
+        <div fxFlex.gt-xs="30" fxFlex.lt-sm="100" fxFlexOffset.gt-xs="1"></div>
+      </div>
+
+      <div fxLayout="row" fxFlex="100" fxLayoutAlign="end center">
+        <div fxFlex.gt-sm="30" fxFlex.sm="50" fxFlex.lt-sm="100" fxFlexAlign="space-between" fxLayoutAlign="end center">
+          <button fxFlex fxFlexOffset="1" type="submit" title="Limpar" (click)="limpar()"
+                  mat-button mat-raised-button class="mat-warn">
+            <span>Limpar</span>
+          </button>
+          <button fxFlex fxFlexOffset="1" type="submit" title="Pesquisar"
+                  (click)="pesquisar(filtroDTO)"
+                  mat-button mat-raised-button class="mat-primary">
+            <span>Pesquisar</span>
+          </button>
+        </div>
+      </div>
+
+
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card>
+    <mat-card-content *ngIf="dataSource.data.length != 0">
+      <div
+        fxLayout="column"
+        fxFlex="100">
+
+        <div class="table-detail">
+          <mat-table #table [dataSource]="dataSource">
+
+            <ng-container matColumnDef="login">
+              <mat-header-cell class="style-header" fxHide.xs="true" fxLayoutAlign="center center"
+                               *matHeaderCellDef> Login </mat-header-cell>
+              <mat-cell fxFlex.lt-sm="100" ngClass.gt-sm="style-column" fxLayoutAlign="start center"
+                        *matCellDef="let element">
+                <div fxFlex fxLayout="row">
+                  <div fxFlex="130px" fxHide.gt-xs="true" fxLayoutAlign="end center" fxLayoutGap.lt-sm="1">
+                    <span class="mat-body-strong">Login :</span>
+                  </div>
+                  <div>
+                    {{element.login}}
+                  </div>
+                </div>
+              </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="nome">
+              <mat-header-cell class="style-header" fxHide.xs="true" fxLayoutAlign="center center"
+                               *matHeaderCellDef> Nome </mat-header-cell>
+              <mat-cell fxFlex.lt-sm="100" ngClass.gt-sm="style-column" fxLayoutAlign="start center"
+                        *matCellDef="let element">
+                <div fxFlex fxLayout="row">
+                  <div fxFlex="130px" fxHide.gt-xs="true" fxLayoutAlign="end center" fxLayoutGap.lt-sm="1">
+                    <span class="mat-body-strong">Nome :</span>
+                  </div>
+                  <div>
+                    {{element.nome}}
+                  </div>
+                </div>
+              </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="email">
+              <mat-header-cell fxFlex="15" class="style-header" fxHide.xs="true" fxLayoutAlign="center center"
+                               *matHeaderCellDef> E-Mail </mat-header-cell>
+              <mat-cell fxFlex="15" fxFlex.lt-sm="100" ngClass.gt-sm="style-column" fxLayoutAlign="start center"
+                        *matCellDef="let element">
+                <div fxFlex fxLayout="row">
+                  <div fxFlex="130px" fxHide.gt-xs="true" fxLayoutAlign="end center">
+                    <span class="mat-body-strong text-right">E-Mail :</span>
+                  </div>
+                  <div fxFlex fxLayoutAlign.gt-xs="center center" fxLayoutAlign.lt-sm="start center"
+                       fxLayoutGap.lt-sm="1">
+                    {{element.email}}
+                  </div>
+                </div>
+              </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="statusPortal">
+              <mat-header-cell fxFlex.gt-sm="100px" class="style-header" fxLayoutAlign="center center"
+                               *matHeaderCellDef>Status  </mat-header-cell>
+              <mat-cell fxFlex.gt-sm="100px" fxFlex.lt-sm="100" ngClass.gt-sm="style-column"
+                        fxLayoutAlign="center center" *matCellDef="let element">
+                <div fxFlex fxLayout="row">
+                  <div fxFlex="130px" fxHide.gt-xs="true" fxLayoutAlign="end center">
+                    <span class="mat-body-strong">Status :</span>
+                  </div>
+                  <div fxFlex fxLayoutAlign.gt-xs="center center" fxLayoutAlign.lt-sm="start center"
+                       fxLayoutGap.lt-sm="1">
+                    <mat-slide-toggle [(ngModel)]="element.status" (change)="alterarStatusUsuario(element)"
+                                      title="{{ (element.status ? 'Ativo' : 'Inativo')  }}"
+                                      *ngIf="securityService.hasRoles('ROLE_USUARIO_ATIVAR_INATIVAR')">
+                    </mat-slide-toggle>
+                    <span *ngIf="!securityService.hasRoles('ROLE_USUARIO_ATIVAR_INATIVAR')">
+                                    {{(element.status ? 'Ativo' : 'Inativo') }}
+                                </span>
+                  </div>
+                </div>
+              </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="acoes">
+              <mat-header-cell fxFlex.gt-sm="100px" class="style-header f" fxLayoutAlign="center center"
+                               *matHeaderCellDef> Ações </mat-header-cell>
+              <mat-cell fxFlex.lt-sm="100" fxLayoutAlign="center center" fxFlex.gt-sm="100px"
+                        *matCellDef="let element">
+                <div fxFlex fxLayout="row" fxLayout.lt-sm="column" fxLayoutAlign="center center">
+                  <div fxHide.gt-xs="true" fxLayoutAlign="center center">
+                    <span class="mat-body-strong">Ações :</span>
+                  </div>
+                  <div fxLayout="row" fxLayoutAlign="center center">
+                    <a mat-mini-fab title="Visualizar usuário" class="btn-primary"
+                       *ngIf="securityService.hasRoles('ROLE_USUARIO_VISUALIZAR')"
+                       [routerLink]="['/administracao/usuario', element.id, 'visualizar']">
+                      <mat-icon>search</mat-icon>
+                    </a>
+
+                    <a mat-mini-fab title="Alterar Usuário" class="btn-primary"
+                       *ngIf="securityService.hasRoles('ROLE_USUARIO_ALTERAR')"
+                       [routerLink]="['/administracao/usuario', element.id, 'alterar']">
+                      <mat-icon>edit</mat-icon>
+                    </a>
+                  </div>
+                </div>
+              </mat-cell>
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef="displayedColumns" fxHide.lt-sm="true"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;" fxLayout.lt-sm="column" fxLayout="row"
+                     fxLayoutAlign.lt-sm="space-around stretch"
+                     ngClass.lt-sm="mat-row-lt-sm"
+            ></mat-row>
+
+          </mat-table>
+        </div>
+      </div>
+    </mat-card-content>
+
+    <mat-card-footer>
+      <mat-paginator [pageSize]="PAGINATOR_PAGE_SIZE" hidePageSize showFirstLastButtons></mat-paginator>
+    </mat-card-footer>
+  </mat-card>
+</div>

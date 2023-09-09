@@ -54,7 +54,7 @@ export class FormTipoComponent {
 
   private realizarInclusao() {
     console.log("Dados:", this.formGroup.value);
-    this.tipoService.incluir({body: this.formGroup.value})
+    this.tipoService.incluir1({body: this.formGroup.value})
       .subscribe(retorno => {
         console.log("Retorno:", retorno);
         this.confirmarAcao(retorno, this.ACAO_INCLUIR);
@@ -98,7 +98,7 @@ export class FormTipoComponent {
 
   private realizarEdicao() {
     console.log("Dados:", this.formGroup.value);
-    this.tipoService.alterar({id: this.id, body: this.formGroup.value})
+    this.tipoService.alterar1({id: this.id, body: this.formGroup.value})
       .subscribe(retorno => {
         console.log("Retorno:", retorno);
         this.confirmarAcao(retorno, this.ACAO_EDITAR);

@@ -14,7 +14,7 @@ export const tipoRoutes: Routes = [
         path: "",
         component: ListTipoComponent,
         canActivate: [SecurityGuard],
-        data: {security: {roles: ['ROLE_ADMIN']}}
+        data: {security: {roles: ['ROLE_USUARIO_VISUALIZAR']}}
       },
       {
         path: "novo",

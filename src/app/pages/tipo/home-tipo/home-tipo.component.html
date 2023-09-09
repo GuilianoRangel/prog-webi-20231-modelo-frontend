@@ -4,7 +4,7 @@
   </mat-card-header>
   <mat-card-actions>
     <button mat-raised-button color="primary" [routerLink]="['/tipo','novo']"
-            *ngIf="securityService.hasRoles('ROLE_TIPO_INCLUIR')">
+            *ngIf="securityService.hasRoles('ROLE_USUARIO_VISUALIZAR')">
       <mat-icon>add</mat-icon>
       <span>Adicionar</span>
     </button>

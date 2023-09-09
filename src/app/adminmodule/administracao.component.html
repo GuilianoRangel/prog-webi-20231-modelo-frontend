@@ -1,0 +1,27 @@
+<div fxFlex fxLayout="column"  fxFlexFill class="wrapper mat-typography">
+  <main  fxFlex="strech">
+    <div class="container page-content"
+         fxFlex.gt-xs="{{ FX_FLEX_GT_XS }}"
+         fxFlex.gt-sm="{{ FX_FLEX_GT_SM }}"
+         fxFlex.gt-md="{{ FX_FLEX_GT_MD }}"
+         fxFlex.gt-lg="{{ FX_FLEX_GT_LG }}"
+         fxFlex.xl="{{ FX_FLEX_XL }}"
+         fxLayout="column"
+         fxFlexAlign="start center"
+    >
+      <div>
+        <button mat-button routerLink="/administracao"><mat-icon>home</mat-icon><span>Home</span></button>
+        <button mat-button routerLink="/administracao/grupo"
+                *ngIf="securityService.hasRoles('ROLE_GRUPO_VISUALIZAR')">
+          <mat-icon>group</mat-icon><span>Grupos</span>
+        </button>
+        <button mat-button routerLink="/administracao/usuario"
+                *ngIf="securityService.hasRoles('ROLE_USUARIO_VISUALIZAR')">
+          <mat-icon><span>person_book</span></mat-icon>Usuários
+        </button>
+      </div>
+      <mat-divider></mat-divider>
+      <router-outlet></router-outlet>
+    </div>
+  </main>
+</div>

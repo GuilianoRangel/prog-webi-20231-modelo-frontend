@@ -1,0 +1,5 @@
+<div *ngIf="(inputRef && inputRef.ngControl && inputRef.ngControl.touched) || submitted">
+  <p  *ngFor="let error of errors()">
+    {{error }}
+  </p>
+</div>

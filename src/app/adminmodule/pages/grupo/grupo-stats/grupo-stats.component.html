@@ -1,0 +1,48 @@
+<div fxLayout="column" fxLayoutGap="1%" fxLayoutGap.xs="2%">
+
+  <div fxLayout="row">
+    <div fxFlex fxFlexAlign="center">
+      <span class="content__title">Estatisticas do grupo</span>
+    </div>
+
+  </div>
+
+  <mat-card>
+    <mat-card-content fxLayout="column">
+      <div fxLayout="column" fxLayoutAlign.gt-xs="center center" >
+        <dx-pie-chart
+          id="pie"
+          title="Gráficos de Usuários por Grupo"
+          palette="bright"
+          [dataSource]="grupoStats"
+          (onPointClick)="pointClickHandler($event)"
+          (onLegendClick)="legendClickHandler($event)">
+          <dxi-series
+            argumentField="nome"
+            valueField="totalUsuarios">
+            <dxo-label [visible]="true">
+              <dxo-connector
+                [visible]="true"
+                [width]="1"></dxo-connector>
+            </dxo-label>
+          </dxi-series>
+          <dxo-size [width]="500"></dxo-size>
+          <dxo-export [enabled]="true"></dxo-export>
+        </dx-pie-chart>
+        <dx-chart
+          id="chart"
+          [dataSource]="grupoStats">
+          <dxi-series
+            argumentField="nome"
+            valueField="totalUsuarios"
+            name="Grupos"
+            type="bar"
+            color="#ffaa66">
+          </dxi-series>
+        </dx-chart>
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+
+</div>

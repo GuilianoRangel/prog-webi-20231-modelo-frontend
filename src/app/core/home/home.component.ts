@@ -6,6 +6,7 @@ import {NavigationEnd, Router} from "@angular/router";
 import {delay} from "rxjs";
 import {filter} from "rxjs/operators";
 import {SecurityService} from "../../arquitetura/security/security.service";
+import {AbstractComponent} from "../../adminmodule/shared/component/Abstract.component";
 
 
 @UntilDestroy()
@@ -14,7 +15,7 @@ import {SecurityService} from "../../arquitetura/security/security.service";
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent {
+export class HomeComponent{
   @ViewChild(MatSidenav)
   sidenav!: MatSidenav;
 

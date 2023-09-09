@@ -1,0 +1,52 @@
+@import '../../../ueg-theme';
+
+.style-header{
+  font-weight: bold;
+  background-color: $theme-background-solid;
+}
+
+.f{
+  border-right: none;
+}
+
+.style-column{
+  border-right: 1px #e7e5e5 solid;
+}
+
+.filter-position{
+  margin:3px;
+}
+
+.table-detail{
+  margin-top: 10px;
+  border: 1px #e7e5e5 solid;
+}
+
+.mat-row-lt-sm{
+  min-height: 0;
+}
+
+@media(max-width: 600px) {
+
+  //.mat-header-row {
+  //  display: none;
+  //}
+
+  //.mat-row {
+  //  flex-direction: column;
+  //  align-items: start;
+  //  padding: 4px 14px;
+  //}
+
+  //.style-column{
+  //  border:none;
+  //  padding: 0;
+  //  margin:0;
+  //}
+
+  //mat-footer-row, mat-row{
+  //  min-height: 0;
+  //}
+
+
+}
