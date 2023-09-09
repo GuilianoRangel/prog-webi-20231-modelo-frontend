@@ -25,6 +25,6 @@ export class ModuloClientService {
    * @param idSistema
    */
   public getModulos(): Observable<any> {
-    return this.moduloService.getAtivos();
+    return this.moduloService.getModulosAtivos();
   }
 }

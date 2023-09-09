@@ -23,26 +23,26 @@ export class TipoControllerService extends BaseService {
   }
 
   /**
-   * Path part for operation obterPorId
+   * Path part for operation tipoControllerObterPorId
    */
-  static readonly ObterPorIdPath = '/api/v1/tipo/{id}';
+  static readonly TipoControllerObterPorIdPath = '/api/v1/tipo/{id}';
 
   /**
    * Obter os dados completos de uma entidiade pelo id informado!
    *
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `obterPorId()` instead.
+   * To access only the response body, use `tipoControllerObterPorId()` instead.
    *
    * This method doesn't expect any request body.
    */
-  obterPorId$Response(params: {
+  tipoControllerObterPorId$Response(params: {
     id: number;
   },
   context?: HttpContext
 
 ): Observable<StrictHttpResponse<any>> {
 
-    const rb = new RequestBuilder(this.rootUrl, TipoControllerService.ObterPorIdPath, 'get');
+    const rb = new RequestBuilder(this.rootUrl, TipoControllerService.TipoControllerObterPorIdPath, 'get');
     if (params) {
       rb.path('id', params.id, {});
     }
@@ -63,36 +63,36 @@ export class TipoControllerService extends BaseService {
    * Obter os dados completos de uma entidiade pelo id informado!
    *
    * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `obterPorId$Response()` instead.
+   * To access the full response (for headers, for example), `tipoControllerObterPorId$Response()` instead.
    *
    * This method doesn't expect any request body.
    */
-  obterPorId(params: {
+  tipoControllerObterPorId(params: {
     id: number;
   },
   context?: HttpContext
 
 ): Observable<any> {
 
-    return this.obterPorId$Response(params,context).pipe(
+    return this.tipoControllerObterPorId$Response(params,context).pipe(
       map((r: StrictHttpResponse<any>) => r.body as any)
     );
   }
 
   /**
-   * Path part for operation alterar1
+   * Path part for operation tipoControllerAlterar
    */
-  static readonly Alterar1Path = '/api/v1/tipo/{id}';
+  static readonly TipoControllerAlterarPath = '/api/v1/tipo/{id}';
 
   /**
    * Método utilizado para altlerar os dados de uma entidiade
    *
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `alterar1()` instead.
+   * To access only the response body, use `tipoControllerAlterar()` instead.
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  alterar1$Response(params: {
+  tipoControllerAlterar$Response(params: {
     id: number;
     body: TipoDto
   },
@@ -100,7 +100,7 @@ export class TipoControllerService extends BaseService {
 
 ): Observable<StrictHttpResponse<any>> {
 
-    const rb = new RequestBuilder(this.rootUrl, TipoControllerService.Alterar1Path, 'put');
+    const rb = new RequestBuilder(this.rootUrl, TipoControllerService.TipoControllerAlterarPath, 'put');
     if (params) {
       rb.path('id', params.id, {});
       rb.body(params.body, 'application/json');
@@ -122,11 +122,11 @@ export class TipoControllerService extends BaseService {
    * Método utilizado para altlerar os dados de uma entidiade
    *
    * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `alterar1$Response()` instead.
+   * To access the full response (for headers, for example), `tipoControllerAlterar$Response()` instead.
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  alterar1(params: {
+  tipoControllerAlterar(params: {
     id: number;
     body: TipoDto
   },
@@ -134,32 +134,32 @@ export class TipoControllerService extends BaseService {
 
 ): Observable<any> {
 
-    return this.alterar1$Response(params,context).pipe(
+    return this.tipoControllerAlterar$Response(params,context).pipe(
       map((r: StrictHttpResponse<any>) => r.body as any)
     );
   }
 
   /**
-   * Path part for operation remover
+   * Path part for operation tipoControllerRemover
    */
-  static readonly RemoverPath = '/api/v1/tipo/{id}';
+  static readonly TipoControllerRemoverPath = '/api/v1/tipo/{id}';
 
   /**
    * Método utilizado para remover uma entidiade pela id informado
    *
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `remover()` instead.
+   * To access only the response body, use `tipoControllerRemover()` instead.
    *
    * This method doesn't expect any request body.
    */
-  remover$Response(params: {
+  tipoControllerRemover$Response(params: {
     id: number;
   },
   context?: HttpContext
 
 ): Observable<StrictHttpResponse<any>> {
 
-    const rb = new RequestBuilder(this.rootUrl, TipoControllerService.RemoverPath, 'delete');
+    const rb = new RequestBuilder(this.rootUrl, TipoControllerService.TipoControllerRemoverPath, 'delete');
     if (params) {
       rb.path('id', params.id, {});
     }
@@ -180,43 +180,43 @@ export class TipoControllerService extends BaseService {
    * Método utilizado para remover uma entidiade pela id informado
    *
    * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `remover$Response()` instead.
+   * To access the full response (for headers, for example), `tipoControllerRemover$Response()` instead.
    *
    * This method doesn't expect any request body.
    */
-  remover(params: {
+  tipoControllerRemover(params: {
     id: number;
   },
   context?: HttpContext
 
 ): Observable<any> {
 
-    return this.remover$Response(params,context).pipe(
+    return this.tipoControllerRemover$Response(params,context).pipe(
       map((r: StrictHttpResponse<any>) => r.body as any)
     );
   }
 
   /**
-   * Path part for operation desativar
+   * Path part for operation tipoControllerDesativarTipo
    */
-  static readonly DesativarPath = '/api/v1/tipo/{id}';
+  static readonly TipoControllerDesativarTipoPath = '/api/v1/tipo/{id}';
 
   /**
    * Método utilizado para desativar Tipo
    *
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `desativar()` instead.
+   * To access only the response body, use `tipoControllerDesativarTipo()` instead.
    *
    * This method doesn't expect any request body.
    */
-  desativar$Response(params: {
+  tipoControllerDesativarTipo$Response(params: {
     id: number;
   },
   context?: HttpContext
 
 ): Observable<StrictHttpResponse<TipoDto>> {
 
-    const rb = new RequestBuilder(this.rootUrl, TipoControllerService.DesativarPath, 'patch');
+    const rb = new RequestBuilder(this.rootUrl, TipoControllerService.TipoControllerDesativarTipoPath, 'patch');
     if (params) {
       rb.path('id', params.id, {});
     }
@@ -237,42 +237,42 @@ export class TipoControllerService extends BaseService {
    * Método utilizado para desativar Tipo
    *
    * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `desativar$Response()` instead.
+   * To access the full response (for headers, for example), `tipoControllerDesativarTipo$Response()` instead.
    *
    * This method doesn't expect any request body.
    */
-  desativar(params: {
+  tipoControllerDesativarTipo(params: {
     id: number;
   },
   context?: HttpContext
 
 ): Observable<TipoDto> {
 
-    return this.desativar$Response(params,context).pipe(
+    return this.tipoControllerDesativarTipo$Response(params,context).pipe(
       map((r: StrictHttpResponse<TipoDto>) => r.body as TipoDto)
     );
   }
 
   /**
-   * Path part for operation listAll
+   * Path part for operation tipoControllerListAll
    */
-  static readonly ListAllPath = '/api/v1/tipo';
+  static readonly TipoControllerListAllPath = '/api/v1/tipo';
 
   /**
    * Listagem Geral
    *
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `listAll()` instead.
+   * To access only the response body, use `tipoControllerListAll()` instead.
    *
    * This method doesn't expect any request body.
    */
-  listAll$Response(params?: {
+  tipoControllerListAll$Response(params?: {
   },
   context?: HttpContext
 
 ): Observable<StrictHttpResponse<any>> {
 
-    const rb = new RequestBuilder(this.rootUrl, TipoControllerService.ListAllPath, 'get');
+    const rb = new RequestBuilder(this.rootUrl, TipoControllerService.TipoControllerListAllPath, 'get');
     if (params) {
     }
 
@@ -292,42 +292,42 @@ export class TipoControllerService extends BaseService {
    * Listagem Geral
    *
    * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `listAll$Response()` instead.
+   * To access the full response (for headers, for example), `tipoControllerListAll$Response()` instead.
    *
    * This method doesn't expect any request body.
    */
-  listAll(params?: {
+  tipoControllerListAll(params?: {
   },
   context?: HttpContext
 
 ): Observable<any> {
 
-    return this.listAll$Response(params,context).pipe(
+    return this.tipoControllerListAll$Response(params,context).pipe(
       map((r: StrictHttpResponse<any>) => r.body as any)
     );
   }
 
   /**
-   * Path part for operation incluir1
+   * Path part for operation tipoControllerIncluir
    */
-  static readonly Incluir1Path = '/api/v1/tipo';
+  static readonly TipoControllerIncluirPath = '/api/v1/tipo';
 
   /**
    * Método utilizado para realizar a inclusão de um entidade
    *
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `incluir1()` instead.
+   * To access only the response body, use `tipoControllerIncluir()` instead.
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  incluir1$Response(params: {
+  tipoControllerIncluir$Response(params: {
     body: TipoDto
   },
   context?: HttpContext
 
 ): Observable<StrictHttpResponse<any>> {
 
-    const rb = new RequestBuilder(this.rootUrl, TipoControllerService.Incluir1Path, 'post');
+    const rb = new RequestBuilder(this.rootUrl, TipoControllerService.TipoControllerIncluirPath, 'post');
     if (params) {
       rb.body(params.body, 'application/json');
     }
@@ -348,43 +348,43 @@ export class TipoControllerService extends BaseService {
    * Método utilizado para realizar a inclusão de um entidade
    *
    * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `incluir1$Response()` instead.
+   * To access the full response (for headers, for example), `tipoControllerIncluir$Response()` instead.
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  incluir1(params: {
+  tipoControllerIncluir(params: {
     body: TipoDto
   },
   context?: HttpContext
 
 ): Observable<any> {
 
-    return this.incluir1$Response(params,context).pipe(
+    return this.tipoControllerIncluir$Response(params,context).pipe(
       map((r: StrictHttpResponse<any>) => r.body as any)
     );
   }
 
   /**
-   * Path part for operation ativar2
+   * Path part for operation tipoControllerAtivarTipo
    */
-  static readonly Ativar2Path = '/api/v1/tipo/{id}/ativar';
+  static readonly TipoControllerAtivarTipoPath = '/api/v1/tipo/{id}/ativar';
 
   /**
    * Método utilizado para ativar Tipo
    *
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `ativar2()` instead.
+   * To access only the response body, use `tipoControllerAtivarTipo()` instead.
    *
    * This method doesn't expect any request body.
    */
-  ativar2$Response(params: {
+  tipoControllerAtivarTipo$Response(params: {
     id: number;
   },
   context?: HttpContext
 
 ): Observable<StrictHttpResponse<TipoDto>> {
 
-    const rb = new RequestBuilder(this.rootUrl, TipoControllerService.Ativar2Path, 'patch');
+    const rb = new RequestBuilder(this.rootUrl, TipoControllerService.TipoControllerAtivarTipoPath, 'patch');
     if (params) {
       rb.path('id', params.id, {});
     }
@@ -405,18 +405,18 @@ export class TipoControllerService extends BaseService {
    * Método utilizado para ativar Tipo
    *
    * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `ativar2$Response()` instead.
+   * To access the full response (for headers, for example), `tipoControllerAtivarTipo$Response()` instead.
    *
    * This method doesn't expect any request body.
    */
-  ativar2(params: {
+  tipoControllerAtivarTipo(params: {
     id: number;
   },
   context?: HttpContext
 
 ): Observable<TipoDto> {
 
-    return this.ativar2$Response(params,context).pipe(
+    return this.tipoControllerAtivarTipo$Response(params,context).pipe(
       map((r: StrictHttpResponse<TipoDto>) => r.body as TipoDto)
     );
   }

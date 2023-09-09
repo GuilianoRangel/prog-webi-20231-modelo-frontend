@@ -48,9 +48,9 @@ export class UsuarioClientService {
     let result: Observable<any> ;
 
     if (usuario.id) {
-      result= this.usuarioService.alterar({id: usuario.id, body: usuario});
+      result= this.usuarioService.alterarUsuario({id: usuario.id, body: usuario});
     } else {
-      result= this.usuarioService.incluir({body: usuario});
+      result= this.usuarioService.incluirUsuario({body: usuario});
     }
     return result;
   }
@@ -62,7 +62,7 @@ export class UsuarioClientService {
    * @return
    */
   public ativar(id: number): Observable<any> {
-    return this.usuarioService.ativar({id: id});
+    return this.usuarioService.ativarUsuario({id: id});
   }
 
   /**
@@ -72,7 +72,7 @@ export class UsuarioClientService {
    * @return
    */
   public inativar(id: number): Observable<any> {
-    return this.usuarioService.inativar({id: id});
+    return this.usuarioService.inativarUsuario({id: id});
   }
 
   /**

@@ -106,7 +106,7 @@ export class GrupoFormComponent {
    * @param idSistema
    */
   public carregarModulos() {
-    this.moduloClientService.getAtivos().subscribe(
+    this.moduloClientService.getModulosAtivos().subscribe(
       data => {
         this.modulos = data;
         //this.modulos = this.orderPipe.transform(this.modulos, 'nome');

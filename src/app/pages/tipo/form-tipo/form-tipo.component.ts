@@ -54,7 +54,7 @@ export class FormTipoComponent {
 
   private realizarInclusao() {
     console.log("Dados:", this.formGroup.value);
-    this.tipoService.incluir1({body: this.formGroup.value})
+    this.tipoService.tipoControllerIncluir({body: this.formGroup.value})
       .subscribe(retorno => {
         console.log("Retorno:", retorno);
         this.confirmarAcao(retorno, this.ACAO_INCLUIR);
@@ -81,7 +81,7 @@ export class FormTipoComponent {
     if (paramId){
       const codigo = parseInt(paramId);
       console.log("codigo",paramId);
-      this.tipoService.obterPorId({id: codigo}).subscribe(
+      this.tipoService.tipoControllerObterPorId({id: codigo}).subscribe(
         retorno => {
           this.acao = this.ACAO_EDITAR;
           console.log("retorno", retorno);
@@ -98,7 +98,7 @@ export class FormTipoComponent {
 
   private realizarEdicao() {
     console.log("Dados:", this.formGroup.value);
-    this.tipoService.alterar1({id: this.id, body: this.formGroup.value})
+    this.tipoService.tipoControllerAlterar({id: this.id, body: this.formGroup.value})
       .subscribe(retorno => {
         console.log("Retorno:", retorno);
         this.confirmarAcao(retorno, this.ACAO_EDITAR);

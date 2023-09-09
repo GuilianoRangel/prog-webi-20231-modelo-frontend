@@ -29,14 +29,14 @@ export class ListTipoComponent implements OnInit {
   }
 
   private buscarDados() {
-    this.tipoService.listAll().subscribe(data => {
+    this.tipoService.tipoControllerListAll().subscribe(data => {
       this.tipoListaDataSource.data = data;
     })
   }
 
   remover(tipoDto: TipoDto) {
     console.log("Removido", tipoDto.id);
-    this.tipoService.remover({id: tipoDto.id || 0})
+    this.tipoService.tipoControllerRemover({id: tipoDto.id || 0})
       .subscribe(retorno => {
           this.buscarDados();
           this.messageService.addMsgSuccess(`Tipo: ${retorno.nome} Excluído com sucesso!!!`);

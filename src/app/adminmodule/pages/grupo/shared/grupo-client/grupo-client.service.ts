@@ -31,9 +31,9 @@ export class GrupoClientService {
     let result: Observable<any>;
 
     if (grupo.id) {
-      result = this.grupoApiService.alterar4({id: grupo.id, body:grupo} );
+      result = this.grupoApiService.alterarGrupo({id: grupo.id, body:grupo} );
     } else {
-      result = this.grupoApiService.incluir3({body: grupo});
+      result = this.grupoApiService.incluirGrupo({body: grupo});
     }
     return result;
   }
@@ -45,7 +45,7 @@ export class GrupoClientService {
    * @return
    */
   public inativar(id: number): Observable<any> {
-    return this.grupoApiService.inativar1({id: id});
+    return this.grupoApiService.inativarGrupo({id: id});
   }
 
   /**
@@ -55,7 +55,7 @@ export class GrupoClientService {
    * @return
    */
   public ativar(id: number): Observable<any> {
-    return this.grupoApiService.ativar1({id: id});
+    return this.grupoApiService.ativarGrupo({id: id});
   }
 
   /**
@@ -65,7 +65,7 @@ export class GrupoClientService {
    * @return
    */
   public getById(id: number): Observable<any> {
-    return this.grupoApiService.getById({id: id});
+    return this.grupoApiService.getGrupoById({id: id});
   }
 
   /**
@@ -74,7 +74,7 @@ export class GrupoClientService {
    * @param filtroDTO
    */
   public getByFiltro(filtroDTO: FiltroGrupoDto): Observable<any> {
-    return this.grupoApiService.getAllByFiltro({filtroGrupoDTO: filtroDTO})
+    return this.grupoApiService.getAllGrupoByFiltro({filtroGrupoDTO: filtroDTO})
   }
 
   /**
@@ -83,7 +83,7 @@ export class GrupoClientService {
    * @param idSistema
    */
   public getGruposAtivos(): Observable<any> {
-    return this.grupoApiService.getAtivos1();
+    return this.grupoApiService.getGruposAtivos();
   }
 
   /**
