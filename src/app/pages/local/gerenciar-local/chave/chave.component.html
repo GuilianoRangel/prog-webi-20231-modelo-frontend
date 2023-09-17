@@ -1,0 +1,42 @@
+<mat-card>
+  <mat-card-title fxLayout="row" fxLayoutAlign="space-between stretch">
+    <span>Chaves do Local</span>
+    <a mat-mini-fab title="Adicionar" class="btn-primary add-chave"
+       (click)="adicionarChave()"
+    >
+      <mat-icon>add</mat-icon>
+    </a>
+  </mat-card-title>
+    <mat-card-content fxLayout="column" fxLayoutGap="0.7%" fxLayoutGap.xs="3%">
+      <table mat-table [dataSource]="chavesListaDataSource">
+
+        <!-- Position Column -->
+        <ng-container matColumnDef="numero">
+          <th mat-header-cell *matHeaderCellDef  fxFlex="90px"> Número </th>
+          <td mat-cell *matCellDef="let element"  fxFlex="90px"> {{element.numero}} </td>
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="qrCode">
+          <th mat-header-cell *matHeaderCellDef fxFlex> QrCode </th>
+          <td mat-cell *matCellDef="let element" fxFlex > {{element.qrCode}} </td>
+        </ng-container>
+
+        <!-- Ação Column -->
+        <ng-container matColumnDef="acao">
+          <th mat-header-cell *matHeaderCellDef fxFlex="120px" > Ação </th>
+          <td mat-cell *matCellDef="let element" fxFlex="120px" >
+            <button mat-mini-fab (click)="confirmarExcluirChave(element.numero)">
+              <mat-icon>delete_forever</mat-icon>
+            </button>
+            <button mat-mini-fab class="btnEditar" (click)="editarChave(element)">
+              <mat-icon>edit</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="colunasMostrar; sticky: true"></tr>
+        <tr mat-row *matRowDef="let row; columns: colunasMostrar;"></tr>
+      </table>
+    </mat-card-content>
+</mat-card>

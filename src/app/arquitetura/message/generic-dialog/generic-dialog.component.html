@@ -1,0 +1,34 @@
+<mat-dialog-content>
+  <template #dialogContainer></template>
+</mat-dialog-content>
+<mat-dialog-actions align="center" *ngIf="item.isConfirmTypeYesNo()">
+  <button
+    [title]="item.labelButtonNo"
+    (click)="onConfirmNo()"
+    mat-dialog-close
+    mat-raised-button
+    tabindex="-1"
+  >
+    <span>{{item.labelButtonNo}}</span>
+  </button>
+  <button
+    [title]="item.labelButtonYesOk"
+    (click)="onConfirmYesOk()"
+    mat-raised-button
+    color="primary"
+    tabindex="1"
+  >
+    <span>{{item.labelButtonYesOk}}</span>
+  </button>
+</mat-dialog-actions>
+<mat-dialog-actions align="center" *ngIf="item.isConfirmTypeOk()">
+  <button
+    [title]="item.labelButtonYesOk"
+    (click)="onConfirmYesOk()"
+    mat-raised-button
+    color="primary"
+    tabindex="1"
+  >
+    <span>{{item.labelButtonYesOk}}</span>
+  </button>
+</mat-dialog-actions>

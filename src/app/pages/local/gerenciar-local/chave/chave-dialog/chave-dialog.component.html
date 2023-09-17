@@ -1,0 +1,20 @@
+<form   [formGroup]="formGroup"
+        (ngSubmit)="onSubmit()">
+    <mat-card fxLayout="column" fxLayoutGap="1%" fxLayoutGap.xs="2%">
+      <mat-card-title>
+          <span>Dados da Chave</span>
+      </mat-card-title>
+      <mat-card-content fxLayout="column" fxLayoutGap="0.7%" fxLayoutGap.xs="3%">
+
+        <div fxLayout="row" fxLayoutAlign.gt-xs="center end" fxLayout.lt-sm="column" fxLayoutGap="0.7%">
+          <mat-form-field fxFlex>
+            <mat-label>Número da Chave</mat-label>
+            <input matInput placeholder="Informe o Número da Chave" title="Número"
+                   name="numero" required maxlength="6" formControlName="numero"
+            >
+            <mat-error validationMessage ></mat-error>
+          </mat-form-field>
+        </div>
+      </mat-card-content>
+    </mat-card>
+</form>

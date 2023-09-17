@@ -1,0 +1,27 @@
+@import "./src/ueg-theme";
+.style-header{
+  font-weight: bold;
+  background-color: $theme-background-solid;
+}
+
+.f{
+  border-right: none;
+}
+
+.style-column{
+  border-right: 1px #e7e5e5 solid;
+}
+
+.filter-position{
+  margin:3px;
+}
+
+.table-detail{
+  margin-top: 10px;
+  border: 1px #e7e5e5 solid;
+}
+
+.mat-row-lt-sm{
+  min-height: 0;
+}
+

@@ -1,0 +1,20 @@
+.button-card {
+  margin: 20px;
+  padding: 20px;
+  text-align: center;
+}
+
+.button {
+  width: 80%;
+  max-width: 300px;
+  margin: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 300px;
+}
+
+.button-image {
+  width: 200px; /* Ajuste o tamanho da imagem conforme necessário */
+  height: auto;
+}

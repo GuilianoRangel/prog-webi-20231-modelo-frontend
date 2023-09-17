@@ -1,0 +1,65 @@
+<!--<form   [formGroup]="formGroup"
+        (ngSubmit)="onSubmit()">-->
+<div fxLayout="column" fxLayoutGap="1.5%" fxLayoutGap.xs="2%">
+    <mat-card fxLayout="column" fxLayoutGap="1%" fxLayoutGap.xs="2%">
+      <mat-card fxLayout="column" fxLayoutGap="1%" fxLayoutGap.xs="2%">
+        <mat-card-title>
+          <span>Gerencia de Local</span>
+        </mat-card-title>
+        <mat-card-content fxLayout="column" fxLayoutGap="0.7%" fxLayoutGap.xs="3%"
+                          fxLayoutAlign="center stretch"
+        >
+
+          <div fxLayout="row" fxLayoutAlign.gt-xs="center end" fxLayout.lt-sm="column" fxLayoutGap="0.7%">
+            <mat-form-field fxFlex>
+              <mat-label>Número da Sala</mat-label>
+              <input matInput placeholder="Informe o Número da Sala" title="Número Sala"
+                     name="numeroSala" required maxlength="6" [(ngModel)]="local.numeroSala"
+                     [disabled]="true"
+              >
+            </mat-form-field>
+
+            <mat-form-field fxFlex>
+              <mat-label>Nome</mat-label>
+              <input matInput placeholder="Informe o Nome" title="Nome" type="text"
+                     name="nome" required maxlength="20" [(ngModel)]="local.nome"
+                     [disabled]="true"
+              >
+            </mat-form-field>
+          </div>
+
+          <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="0.7%"
+               fxLayoutAlign="center stretch"
+          >
+            <div fxLayout="column" fxLayoutGap="1%" fxLayoutGap.xs="2%" fxFlex="50">
+                  <app-chave-lista [local]="local" ></app-chave-lista>
+            </div>
+            <mat-card fxLayout="column" fxLayoutGap="1%" fxLayoutGap.xs="2%" fxFlex="50">
+              <mat-card-title>
+                <span>Responsáveis pelo Local</span>
+              </mat-card-title>
+              <mat-card-content fxLayout="column" fxLayoutGap="0.7%" fxLayoutGap.xs="3%">
+                asdfas
+              </mat-card-content>
+            </mat-card>
+          </div>
+        </mat-card-content>
+      </mat-card>
+
+      <mat-card-footer fxLayout="column" fxLayoutGap="1%" fxLayoutGap.xs="2%">
+        <div fxLayout="row" fxFlex="100" fxLayoutAlign="end center">
+          <div fxFlex.gt-sm="30" fxFlex.sm="50" fxFlex.lt-sm="100" fxFlexAlign="space-between"
+               fxLayoutAlign="end center">
+            <a title="Voltar" (click)="cancelar()" fxFlex fxFlexOffset="1"
+               mat-button mat-raised-button class="mat-warn"
+            >
+              <span>Voltar</span>
+            </a>
+
+          </div>
+        </div>
+      </mat-card-footer>
+
+    </mat-card>
+  </div>
+<!--</form>-->

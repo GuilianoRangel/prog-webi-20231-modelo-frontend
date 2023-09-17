@@ -1,0 +1,140 @@
+<div fxLayout="column" fxLayoutGap="1%" fxLayoutGap.xs="2%">
+
+  <div fxLayout="row">
+    <div fxFlex fxFlexAlign="center">
+      <span class="content__title">Lista de Locais</span>
+    </div>
+    <div fxFlex fxLayoutAlign="end center">
+      <button mat-button mat-raised-button class="mat-accent"
+              title="Adicionar" routerLink="/local/incluir">
+        Adicionar
+      </button>
+    </div>
+  </div>
+
+  <mat-card>
+    <!--<mat-card-title>Locais Cadastrados</mat-card-title>-->
+    <mat-card-content fxLayout="column">
+      <div fxLayout="row" fxFlexAlign="space-between" fxLayoutAlign.gt-xs="center center" fxLayout.lt-sm="column">
+        <div fxFlex="75" fxFlex.lt-sm="100">
+          <div fxFlex="80px">
+            <img height="75" src="assets/sharedkeys/botao-locais2-transparent.png" alt="Locais">
+          </div>
+          <mat-form-field fxFlex>
+            <mat-label>Local</mat-label>
+            <input matInput placeholder="Informe o Nome" title="Nome"
+                    maxlength="100">
+          </mat-form-field>
+        </div>
+        <div fxLayout="row" fxFlex="20" fxLayoutAlign="end center">
+          <div fxFlex="100" fxFlexAlign="space-between" fxLayoutAlign="end center">
+            <button fxFlex fxFlexOffset="1" type="submit" title="Limpar" (click)="limpar()"
+                    mat-button mat-raised-button class="mat-warn">
+              <span>Limpar</span>
+            </button>
+            <button fxFlex fxFlexOffset="1" type="submit" title="Pesquisar"
+                    (click)="pesquisar(filtroDTO)"
+                    mat-button mat-raised-button class="mat-primary">
+              <span>Pesquisar</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card>
+    <mat-card-content *ngIf="dataSource.data.length != 0">
+      <div
+        fxLayout="column"
+        fxFlex="100">
+
+        <div class="table-detail">
+          <mat-table #table [dataSource]="dataSource">
+
+            <ng-container matColumnDef="numeroSala">
+              <mat-header-cell class="style-header" fxLayoutAlign="center center"
+                               *matHeaderCellDef> Número Sala </mat-header-cell>
+              <mat-cell ngClass.gt-sm="style-column" fxLayoutAlign="start center" *matCellDef="let element">
+                <div fxFlex fxLayout="row">
+                  <div fxFlex="80px" fxHide.gt-xs="true" fxLayoutAlign="center end">
+                    <span class="mat-body-strong">Número Sala :</span>
+                  </div>
+                  <div>
+                    {{element.numeroSala}}
+                  </div>
+                </div>
+              </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="nome">
+              <mat-header-cell class="style-header" fxLayoutAlign="center center"
+                               *matHeaderCellDef> Nome </mat-header-cell>
+              <mat-cell ngClass.gt-sm="style-column" fxLayoutAlign="start center" *matCellDef="let element">
+                <div fxFlex fxLayout="row">
+                  <div fxFlex="80px" fxHide.gt-xs="true" fxLayoutAlign="center end">
+                    <span class="mat-body-strong">Nome :</span>
+                  </div>
+                  <div>
+                    {{element.nome}}
+                  </div>
+                </div>
+              </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="descricao">
+              <mat-header-cell class="style-header" fxLayoutAlign="center center"
+                               *matHeaderCellDef> Descrição </mat-header-cell>
+              <mat-cell ngClass.gt-sm="style-column" fxLayoutAlign="start center" *matCellDef="let element">
+                <div fxFlex fxLayout="row">
+                  <div fxFlex="80px" fxHide.gt-xs="true" fxLayoutAlign="center end">
+                    <span class="mat-body-strong">Descrição :</span>
+                  </div>
+                  <div>
+                    {{element.descricao}}
+                  </div>
+                </div>
+              </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="acoes">
+              <mat-header-cell fxFlex.gt-xs="100px" class="style-header f" fxLayoutAlign="center center"
+                               *matHeaderCellDef>Ações
+              </mat-header-cell>
+              <mat-cell fxFlex.lt-sm="100" fxLayoutAlign="center center" fxFlex.gt-xs="100px"
+                        *matCellDef="let element">
+                <div fxFlex fxLayout="row" fxLayout.lt-sm="column">
+                  <div fxHide.gt-xs="true" fxLayoutAlign="center end">
+                    <span class="mat-body-strong">Ações :</span>
+                  </div>
+                  <div fxLayout="row" fxLayoutAlign="center center">
+                    <a mat-mini-fab title="Gerenciar" class="btn-primary"
+                       *ngIf="securityService.hasRoles('ROLE_GRUPO_VISUALIZAR')"
+                       [routerLink]="['/local', element.idHash, 'gerenciar']">
+                      <mat-icon>search</mat-icon>
+                    </a>
+
+                    <a mat-mini-fab title="Alterar" class="btn-primary"
+                       *ngIf="securityService.hasRoles('ROLE_GRUPO_ALTERAR')"
+                       [routerLink]="['/local', element.idHash, 'alterar']">
+                      <mat-icon>edit</mat-icon>
+                    </a>
+                  </div>
+                </div>
+              </mat-cell>
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef="displayedColumns" fxHide.lt-sm="true"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;" fxLayout.lt-sm="column" fxLayout="row"
+                     fxLayoutAlign.lt-sm="space-around stretch"
+                     ngClass.lt-sm="mat-row-lt-sm"
+            ></mat-row>
+
+          </mat-table>
+        </div>
+      </div>
+    </mat-card-content>
+    <mat-card-footer>
+      <mat-paginator [pageSize]="PAGINATOR_PAGE_SIZE" hidePageSize showFirstLastButtons></mat-paginator>
+    </mat-card-footer>
+  </mat-card>
+</div>
