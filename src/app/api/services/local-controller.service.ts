@@ -197,26 +197,26 @@ export class LocalControllerService extends BaseService {
   }
 
   /**
-   * Path part for operation localControllerObterPorId_1
+   * Path part for operation localControllerObterPorIdHash
    */
-  static readonly LocalControllerObterPorId_1Path = '/api/v1/local/hash/{id}';
+  static readonly LocalControllerObterPorIdHashPath = '/api/v1/local/hash/{id}';
 
   /**
    * Obter os dados completos de uma entidiade pelo id informado!
    *
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `localControllerObterPorId_1()` instead.
+   * To access only the response body, use `localControllerObterPorIdHash()` instead.
    *
    * This method doesn't expect any request body.
    */
-  localControllerObterPorId_1$Response(params: {
+  localControllerObterPorIdHash$Response(params: {
     id: string;
   },
   context?: HttpContext
 
 ): Observable<StrictHttpResponse<any>> {
 
-    const rb = new RequestBuilder(this.rootUrl, LocalControllerService.LocalControllerObterPorId_1Path, 'get');
+    const rb = new RequestBuilder(this.rootUrl, LocalControllerService.LocalControllerObterPorIdHashPath, 'get');
     if (params) {
       rb.path('id', params.id, {});
     }
@@ -237,36 +237,36 @@ export class LocalControllerService extends BaseService {
    * Obter os dados completos de uma entidiade pelo id informado!
    *
    * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `localControllerObterPorId_1$Response()` instead.
+   * To access the full response (for headers, for example), `localControllerObterPorIdHash$Response()` instead.
    *
    * This method doesn't expect any request body.
    */
-  localControllerObterPorId_1(params: {
+  localControllerObterPorIdHash(params: {
     id: string;
   },
   context?: HttpContext
 
 ): Observable<any> {
 
-    return this.localControllerObterPorId_1$Response(params,context).pipe(
+    return this.localControllerObterPorIdHash$Response(params,context).pipe(
       map((r: StrictHttpResponse<any>) => r.body as any)
     );
   }
 
   /**
-   * Path part for operation localControllerAlterar_1
+   * Path part for operation localControllerAlterarIdHash
    */
-  static readonly LocalControllerAlterar_1Path = '/api/v1/local/hash/{id}';
+  static readonly LocalControllerAlterarIdHashPath = '/api/v1/local/hash/{id}';
 
   /**
    * Método utilizado para altlerar os dados de uma entidiade
    *
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `localControllerAlterar_1()` instead.
+   * To access only the response body, use `localControllerAlterarIdHash()` instead.
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  localControllerAlterar_1$Response(params: {
+  localControllerAlterarIdHash$Response(params: {
     id: string;
     body: LocalDto
   },
@@ -274,7 +274,7 @@ export class LocalControllerService extends BaseService {
 
 ): Observable<StrictHttpResponse<any>> {
 
-    const rb = new RequestBuilder(this.rootUrl, LocalControllerService.LocalControllerAlterar_1Path, 'put');
+    const rb = new RequestBuilder(this.rootUrl, LocalControllerService.LocalControllerAlterarIdHashPath, 'put');
     if (params) {
       rb.path('id', params.id, {});
       rb.body(params.body, 'application/json');
@@ -296,11 +296,11 @@ export class LocalControllerService extends BaseService {
    * Método utilizado para altlerar os dados de uma entidiade
    *
    * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `localControllerAlterar_1$Response()` instead.
+   * To access the full response (for headers, for example), `localControllerAlterarIdHash$Response()` instead.
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  localControllerAlterar_1(params: {
+  localControllerAlterarIdHash(params: {
     id: string;
     body: LocalDto
   },
@@ -308,32 +308,32 @@ export class LocalControllerService extends BaseService {
 
 ): Observable<any> {
 
-    return this.localControllerAlterar_1$Response(params,context).pipe(
+    return this.localControllerAlterarIdHash$Response(params,context).pipe(
       map((r: StrictHttpResponse<any>) => r.body as any)
     );
   }
 
   /**
-   * Path part for operation localControllerRemover_1
+   * Path part for operation localControllerRemoverIdHash
    */
-  static readonly LocalControllerRemover_1Path = '/api/v1/local/hash/{id}';
+  static readonly LocalControllerRemoverIdHashPath = '/api/v1/local/hash/{id}';
 
   /**
    * Método utilizado para remover uma entidiade pela id informado
    *
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `localControllerRemover_1()` instead.
+   * To access only the response body, use `localControllerRemoverIdHash()` instead.
    *
    * This method doesn't expect any request body.
    */
-  localControllerRemover_1$Response(params: {
+  localControllerRemoverIdHash$Response(params: {
     id: string;
   },
   context?: HttpContext
 
 ): Observable<StrictHttpResponse<any>> {
 
-    const rb = new RequestBuilder(this.rootUrl, LocalControllerService.LocalControllerRemover_1Path, 'delete');
+    const rb = new RequestBuilder(this.rootUrl, LocalControllerService.LocalControllerRemoverIdHashPath, 'delete');
     if (params) {
       rb.path('id', params.id, {});
     }
@@ -354,18 +354,18 @@ export class LocalControllerService extends BaseService {
    * Método utilizado para remover uma entidiade pela id informado
    *
    * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `localControllerRemover_1$Response()` instead.
+   * To access the full response (for headers, for example), `localControllerRemoverIdHash$Response()` instead.
    *
    * This method doesn't expect any request body.
    */
-  localControllerRemover_1(params: {
+  localControllerRemoverIdHash(params: {
     id: string;
   },
   context?: HttpContext
 
 ): Observable<any> {
 
-    return this.localControllerRemover_1$Response(params,context).pipe(
+    return this.localControllerRemoverIdHash$Response(params,context).pipe(
       map((r: StrictHttpResponse<any>) => r.body as any)
     );
   }

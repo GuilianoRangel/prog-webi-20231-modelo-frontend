@@ -44,7 +44,7 @@ export class ValidationMessageComponent implements AfterViewInit {
 
     // sub to the control's status stream
     this.inputRef.ngControl?.valueChanges?.subscribe(value => this.removerEspacosString(value));
-    // this.inputRef.ngControl.statusChanges.subscribe(this.updateErrors);
+    //this.inputRef.ngControl.statusChanges.subscribe(this.updateErrors);
   }
 
   /**
@@ -63,19 +63,26 @@ export class ValidationMessageComponent implements AfterViewInit {
    */
   public errors(): string[] {
     const errors = [];
-
     if (this.inputRef.ngControl && this.inputRef.ngControl.errors !== null) {
       for (const error of Object.keys(this.inputRef.ngControl.errors)) {
+        const errorObject = this.inputRef.ngControl.errors[error];
         if (this.inputRef.ngControl.hasError(error)) {
           let message = this.validationResource.getMessage(error);
-
           if (message === undefined) {
             message = error;
           }
+          message = this.sprintf(message, Object.values(errorObject));
           errors.push(message);
         }
       }
     }
     return errors;
+  }
+
+  sprintf(format: string, args: any[]) {
+    var i = 0;
+    return format.replace(/%s/g, function() {
+      return args[i++];
+    });
   }
 }

@@ -8,6 +8,7 @@ import {ConfirmDialogComponent} from './confirm-mesage/confirm-dialog.component'
 import {MatDialogModule} from "@angular/material/dialog";
 import {MatIconModule} from "@angular/material/icon";
 import {MatButtonModule} from "@angular/material/button";
+import { GenericDialogComponent } from './generic-dialog/generic-dialog.component';
 
 /**
  * Módulo responsável por prover recursos de 'mensagens' e 'i18n'.
@@ -24,7 +25,8 @@ import {MatButtonModule} from "@angular/material/button";
   ],
   declarations: [
     AlertMessageComponent,
-    ConfirmDialogComponent
+    ConfirmDialogComponent,
+    GenericDialogComponent
   ],
   exports: [
     AlertMessageComponent,

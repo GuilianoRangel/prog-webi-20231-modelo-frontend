@@ -16,6 +16,7 @@ import {MatInputModule} from "@angular/material/input";
 import {ReactiveFormsModule} from "@angular/forms";
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from "@angular/material/core";
+import {ValidationModule} from "../../adminmodule/shared/validation/validation.module";
 @NgModule({
   declarations: [
     ListTipoComponent,
@@ -34,7 +35,7 @@ import {MatNativeDateModule} from "@angular/material/core";
     MatInputModule,
     ReactiveFormsModule,
     MatDatepickerModule,
-    MatNativeDateModule,
+    MatNativeDateModule
   ]
 })
 export class TipoModule { }

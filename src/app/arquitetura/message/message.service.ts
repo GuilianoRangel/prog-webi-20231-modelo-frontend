@@ -1,5 +1,6 @@
 /* tslint:disable:variable-name no-redundant-jsdoc */
-import { Injectable, EventEmitter } from '@angular/core';
+import {Injectable, EventEmitter, Component} from '@angular/core';
+import {ComponentType} from "@angular/cdk/overlay";
 
 /**
  * Classe de representação de 'Mensagem'.
@@ -110,12 +111,125 @@ export class MessageItem {
   }
 }
 
+
+/**
+ * Classe de representação de 'Message Dialog'.
+ *
+ * @author Guiliano Rangel (UEG)
+ */
+export class MessageDialog {
+
+  private _dialog: ComponentType<any>;
+  private _data: any;
+  private _labelButtonYesOk: string = "" ;
+  private _labelButtonNo: string ="";
+  private _listenerNo?: ConfirmDataListener;
+  private _listenerYesOk?: ConfirmDataListener;
+
+  /**
+   * Construtor da classe.
+   *
+   * @param listenerYesOk -
+   * @param listenerNo -
+   */
+  constructor(dialog: ComponentType<any>, data:any, labelButtonYesOk?: string, listenerYesOk?: ConfirmDataListener, labelButtonNo?:string, listenerNo?: ConfirmDataListener) {
+    this._dialog = dialog;
+    this._data = data;
+    if(labelButtonYesOk){
+      this._labelButtonYesOk = labelButtonYesOk;
+    }else if (labelButtonYesOk == undefined){
+      this._labelButtonYesOk = "OK";
+    }
+    if(labelButtonNo) {
+      this._labelButtonNo = labelButtonNo;
+    }else if(labelButtonNo == undefined){
+      this._labelButtonNo = "CANCELAR";
+    }
+    this._listenerNo = listenerNo;
+    this._listenerYesOk = listenerYesOk;
+  }
+
+  /**
+   * @returns dialog
+   */
+  public get dialog(): ComponentType<any> {
+    return this._dialog;
+  }
+  /**
+   * @returns data
+   */
+  public get data(): any {
+    return this._data;
+  }
+
+  /**
+   * @returns data
+   */
+  public set data(data: any) {
+    this._data = data;
+  }
+
+  public get labelButtonYesOk(): string {
+    return this._labelButtonYesOk;
+  }
+
+  public get labelButtonNo(): string {
+    return this._labelButtonNo;
+  }
+
+  /**
+   * Execulta o callback para as ações 'OK/YES'.
+   */
+  public executYesOk(): void {
+    if (this._listenerYesOk !== null && this._listenerYesOk !== undefined) {
+      this._listenerYesOk(this.data);
+    }
+  }
+
+  /**
+   * Execulta o callback para a ação 'NO'.
+   */
+  public executNo(): void {
+    if (this._listenerNo !== null && this._listenerNo !== undefined) {
+      this._listenerNo(this.data);
+    }
+  }
+
+  /**
+   * Verifica se o item possui o 'type' é igual a 'CONFIRM_TYPE_OK'.
+   *
+   * @returns boolean
+   */
+  public isConfirmTypeOk(): boolean {
+    return (this._listenerYesOk !== null && this._listenerYesOk !== undefined && !!this.labelButtonYesOk) &&
+      (this._listenerNo === null || this._listenerNo === undefined || !this.labelButtonNo );
+  }
+
+
+  /**
+   * Verifica se o item possui o 'type' é igual a 'CONFIRM_TYPE_YES_NO'.
+   *
+   * @returns boolean
+   */
+  public isConfirmTypeYesNo(): boolean {
+    return this._listenerNo !== null && this._listenerNo !== undefined && !!this.labelButtonYesOk
+      this._listenerYesOk !== null && this._listenerYesOk !== undefined && !!this.labelButtonNo;
+  }
+
+}
 /**
  * Interface 'Listener' que determina o contrato da função callback referente ao 'confirm-mesage'.
  *
  * @author Guiliano Rangel (UEG)
  */
 export type ConfirmListener = () => void;
+
+/**
+ * Interface 'Listener' que determina o contrato da função callback referente ao 'confirm-dialog'.
+ *
+ * @author Guiliano Rangel (UEG)
+ */
+export type ConfirmDataListener = (data: any) => void;
 
 /**
  * Classe 'service' responsável por prover o recurso de mensagem da aplicação.
@@ -126,6 +240,7 @@ export type ConfirmListener = () => void;
 export class MessageService {
   private msgEmitter: EventEmitter<MessageItem>;
   private confirmEmitter: EventEmitter<MessageItem>;
+  private dialogEmitter: EventEmitter<MessageDialog>;
 
   /**
    * Construtor da classe.
@@ -135,6 +250,7 @@ export class MessageService {
   constructor() {
     this.msgEmitter = new EventEmitter();
     this.confirmEmitter = new EventEmitter();
+    this.dialogEmitter = new EventEmitter();
   }
 
   /**
@@ -207,6 +323,19 @@ export class MessageService {
   }
 
   /**
+   * Adiciona o Dialog com ação de  YES/NO.
+   *
+   * @param msg -
+   * @param listenerYes -
+   * @param listenerNo -
+   * @param params -
+   */
+  public addDialogYesNo(componentType: ComponentType<any>, data: any, labelButtonYesOk:string, listenerYesOk?: ConfirmDataListener, labelButtonNo?: string, listenerNo?: ConfirmDataListener, params?: any): void {
+    this.dialogEmitter.emit(new MessageDialog(componentType, data, labelButtonYesOk, listenerYesOk, labelButtonNo, listenerNo));
+
+  }
+
+  /**
    * Adiciona mensagem de Sucesso.
    *
    * @param msg -
@@ -258,5 +387,12 @@ export class MessageService {
    */
   public getConfirmEmitter(): EventEmitter<MessageItem> {
     return this.confirmEmitter;
+  }
+
+  /**
+   * @returns EventEmitter
+   */
+  public getDialogEmitter(): EventEmitter<MessageDialog> {
+    return this.dialogEmitter;
   }
 }

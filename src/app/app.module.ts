@@ -28,11 +28,16 @@ import {AdministracaoModule} from "./adminmodule/administracao.module";
 import {provideNgxMask} from "ngx-mask";
 import {ValidationResourceProvider} from "./adminmodule/shared/validation/validation.resource";
 import {AppMessage} from "./adminmodule/app.message";
+import {HomeSharedKeysComponent} from "./pages/home/home-shared-keys.component";
+
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
+import {LocalModule} from "./pages/local/local.module";
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
+    HomeSharedKeysComponent,
     LoaderDialogComponent
   ],
   imports: [
@@ -42,6 +47,7 @@ import {AppMessage} from "./adminmodule/app.message";
     BrowserAnimationsModule,
     MaterialModule,
     AdministracaoModule,
+    LocalModule,
     LoaderModule,
     TipoModule,
     AutenticacaoModule,
@@ -69,6 +75,7 @@ import {AppMessage} from "./adminmodule/app.message";
       useValue: AppMessage,
     }
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class AppModule { }

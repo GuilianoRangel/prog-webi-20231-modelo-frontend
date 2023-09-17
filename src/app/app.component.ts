@@ -7,8 +7,10 @@ import {AutenticacaoService} from "./arquitetura/autenticacao/autenticacao.servi
 import {User} from "./arquitetura/security/User";
 import {Router} from "@angular/router";
 import {MatSnackBar} from "@angular/material/snack-bar";
-import {MessageItem, MessageService} from "./arquitetura/message/message.service";
+import {MessageDialog, MessageItem, MessageService} from "./arquitetura/message/message.service";
 import {ConfirmDialogComponent} from "./arquitetura/message/confirm-mesage/confirm-dialog.component";
+import {GenericDialogComponent} from "./arquitetura/message/generic-dialog/generic-dialog.component";
+import {ComponentType} from "@angular/cdk/overlay";
 
 @Component({
   selector: 'app-root',
@@ -77,6 +79,7 @@ export class AppComponent implements  OnInit{
       }
     });
     this.messageService.getConfirmEmitter().subscribe((item: MessageItem) => this.addConfirmItem(item));
+    this.messageService.getDialogEmitter().subscribe((item: MessageDialog) => this.addDialogItem(item));
   }
 
   /**
@@ -88,6 +91,20 @@ export class AppComponent implements  OnInit{
     this.dialog.open(ConfirmDialogComponent, {
       minWidth: '30%',
       minHeight: '30%',
+      disableClose: true,
+      data: {item}
+    });
+  }
+
+  /**
+   * Adiciona o Dialog a view.
+   *
+   * @param item
+   */
+  private addDialogItem(item: MessageDialog, minWidthParam: string = '30%', minHeightParam: string = '30%'): void {
+    this.dialog.open(GenericDialogComponent, {
+      minWidth: minWidthParam,
+      minHeight: minHeightParam,
       disableClose: true,
       data: {item}
     });

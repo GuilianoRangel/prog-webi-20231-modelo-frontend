@@ -6,7 +6,7 @@ export interface LocalDto {
   /**
    * Lista de chaves do local
    */
-  chaves?: Array<ChaveDto>;
+  chaves: Array<ChaveDto>;
 
   /**
    * Descricao do Nome da sala
@@ -21,10 +21,10 @@ export interface LocalDto {
   /**
    * Nome da sala
    */
-  nome?: string;
+  nome: string;
 
   /**
    * Número identificador da sala
    */
-  numeroSala?: number;
+  numeroSala: number;
 }

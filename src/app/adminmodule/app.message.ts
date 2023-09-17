@@ -23,8 +23,10 @@ export class AppMessage implements ValidationResource {
 
       // Validation
       required: 'Campo obrigat\u00F3rio n\u00E3o preenchido.',
-      minlength: 'Total de caracteres inferior ao tamanho mínimo.',
+      minlength: 'Total de caracteres inferior ao tamanho mínimo. (Mínimo: %s)',
       maxlength: 'Total de caracteres excede o tamanho máximo.',
+      max: 'Valor maior que o máximo permitido (Máximo: %s)',
+      min: 'Valor menor que o mínimo permitido (Mínimo: %s)',
       'Mask error': 'Valor inválido',
     };
   }
