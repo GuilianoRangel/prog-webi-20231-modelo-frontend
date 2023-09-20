@@ -1,0 +1,26 @@
+
+<form
+  [formGroup]="formGroup"
+  (ngSubmit)="onSubmit()"
+  class="form"
+>
+  <div class="formTipo">
+    <h1>Formulário para {{acao}}</h1>
+  <mat-form-field>
+    <mat-label>Nome:</mat-label>
+    <input matInput formControlName="nome">
+    <mat-error validationMessage></mat-error>
+
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Status:</mat-label>
+    <mat-select formControlName="tipo_id">
+      <mat-option>Selecione</mat-option>
+      <mat-option *ngFor="let tipo of tipos" [value]="tipo.id">{{tipo.nome}}</mat-option>
+    </mat-select>
+    <mat-error validationMessage>    </mat-error>
+  </mat-form-field>
+  <button mat-raised-button color="primary" type="submit">Salvar</button>
+</div>
+</form>
+

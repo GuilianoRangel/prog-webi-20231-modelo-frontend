@@ -125,6 +125,8 @@ export class MessageDialog {
   private _labelButtonNo: string ="";
   private _listenerNo?: ConfirmDataListener;
   private _listenerYesOk?: ConfirmDataListener;
+  private _width: string;
+  private _height: string;
 
   /**
    * Construtor da classe.
@@ -132,7 +134,7 @@ export class MessageDialog {
    * @param listenerYesOk -
    * @param listenerNo -
    */
-  constructor(dialog: ComponentType<any>, data:any, labelButtonYesOk?: string, listenerYesOk?: ConfirmDataListener, labelButtonNo?:string, listenerNo?: ConfirmDataListener) {
+  constructor(dialog: ComponentType<any>, data:any, labelButtonYesOk?: string, listenerYesOk?: ConfirmDataListener, labelButtonNo?:string, listenerNo?: ConfirmDataListener, width?: string, height?: string) {
     this._dialog = dialog;
     this._data = data;
     if(labelButtonYesOk){
@@ -147,6 +149,8 @@ export class MessageDialog {
     }
     this._listenerNo = listenerNo;
     this._listenerYesOk = listenerYesOk;
+    this._width = width || '30%';
+    this._height = height || '30%';
   }
 
   /**
@@ -175,6 +179,14 @@ export class MessageDialog {
 
   public get labelButtonNo(): string {
     return this._labelButtonNo;
+  }
+
+  public get width(): string {
+    return this._width;
+  }
+
+  public get height(): string{
+    return this._height
   }
 
   /**
@@ -325,13 +337,17 @@ export class MessageService {
   /**
    * Adiciona o Dialog com ação de  YES/NO.
    *
-   * @param msg -
-   * @param listenerYes -
+   * @param componentType
+   * @param data
+   * @param labelButtonYesOk
+   * @param listenerYesOk
+   * @param labelButtonNo
    * @param listenerNo -
-   * @param params -
+   * @param width
+   * @param height
    */
-  public addDialogYesNo(componentType: ComponentType<any>, data: any, labelButtonYesOk:string, listenerYesOk?: ConfirmDataListener, labelButtonNo?: string, listenerNo?: ConfirmDataListener, params?: any): void {
-    this.dialogEmitter.emit(new MessageDialog(componentType, data, labelButtonYesOk, listenerYesOk, labelButtonNo, listenerNo));
+  public addDialogYesNo(componentType: ComponentType<any>, data: any, labelButtonYesOk:string, listenerYesOk?: ConfirmDataListener, labelButtonNo?: string, listenerNo?: ConfirmDataListener, width?:string, height?:string,): void {
+    this.dialogEmitter.emit(new MessageDialog(componentType, data, labelButtonYesOk, listenerYesOk, labelButtonNo, listenerNo, width, height));
 
   }
 

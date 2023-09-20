@@ -1,4 +1,4 @@
-import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from '@angular/core';
+import {CUSTOM_ELEMENTS_SCHEMA, NgModule, NO_ERRORS_SCHEMA} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 
 import {AppRoutingModule} from './app-routing.module';
@@ -21,6 +21,8 @@ import {ValidationResourceProvider} from "./adminmodule/shared/validation/valida
 import {AppMessage} from "./adminmodule/app.message";
 import {HomeSharedKeysComponent} from "./pages/home/home-shared-keys.component";
 import {LocalModule} from "./pages/local/local.module";
+import {AmigoModule} from "./pages/amigo/amigo.module";
+import {QRCodeModule} from "angularx-qrcode";
 
 @NgModule({
   declarations: [
@@ -30,6 +32,7 @@ import {LocalModule} from "./pages/local/local.module";
     LoaderDialogComponent
   ],
   imports: [
+    QRCodeModule,
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
@@ -39,6 +42,7 @@ import {LocalModule} from "./pages/local/local.module";
     LocalModule,
     LoaderModule,
     TipoModule,
+    AmigoModule,
     AutenticacaoModule,
     MessageModule.forRoot(),
     SecurityModule,//TODO conferir a configuração
@@ -65,6 +69,6 @@ import {LocalModule} from "./pages/local/local.module";
     }
   ],
   bootstrap: [AppComponent],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
 })
 export class AppModule { }

@@ -101,10 +101,10 @@ export class AppComponent implements  OnInit{
    *
    * @param item
    */
-  private addDialogItem(item: MessageDialog, minWidthParam: string = '30%', minHeightParam: string = '30%'): void {
+  private addDialogItem(item: MessageDialog): void {
     this.dialog.open(GenericDialogComponent, {
-      minWidth: minWidthParam,
-      minHeight: minHeightParam,
+      minWidth: item.width,
+      minHeight: item.height,
       disableClose: true,
       data: {item}
     });

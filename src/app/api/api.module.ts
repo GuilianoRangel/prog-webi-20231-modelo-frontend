@@ -9,6 +9,7 @@ import { TipoControllerService } from './services/tipo-controller.service';
 import { LocalControllerService } from './services/local-controller.service';
 import { GrupoApiService } from './services/grupo-api.service';
 import { AuthApiService } from './services/auth-api.service';
+import { AmigoControllerService } from './services/amigo-controller.service';
 import { ModuloSistemaApiService } from './services/modulo-sistema-api.service';
 
 /**
@@ -24,6 +25,7 @@ import { ModuloSistemaApiService } from './services/modulo-sistema-api.service';
     LocalControllerService,
     GrupoApiService,
     AuthApiService,
+    AmigoControllerService,
     ModuloSistemaApiService,
     ApiConfiguration
   ],

@@ -8,6 +8,7 @@ import {MessageService} from "../../../../arquitetura/message/message.service";
 import {LocalControllerService} from "../../../../api/services/local-controller.service";
 import {ChaveDialogComponent} from "./chave-dialog/chave-dialog.component";
 import {LocalDto} from "../../../../api/models/local-dto";
+import {ChaveQrcodeComponent} from "./chave-qrcode/chave-qrcode.component";
 
 @Component({
   selector: 'app-chave-lista',
@@ -44,7 +45,7 @@ export class ChaveComponent implements OnInit{
   @Output()
   onChangeChave: EventEmitter<ChaveDto[]> = new EventEmitter<ChaveDto[]>();
 
-  colunasMostrar = ['numero', 'qrCode', 'acao'];
+  colunasMostrar = ['numero', 'acao'];
   chavesListaDataSource: MatTableDataSource<ChaveDto> = new MatTableDataSource<ChaveDto>([]);
   constructor(
     private dialog: MatDialog,
@@ -80,7 +81,7 @@ export class ChaveComponent implements OnInit{
       },
       "Cancelar", (data) =>{
         console.log("Cancelar", data);
-      }
+      }, '25%', '25%'
     )
   }
 
@@ -103,14 +104,23 @@ export class ChaveComponent implements OnInit{
     const chave: ChaveDto = {};
     this.messageService.addDialogYesNo(
       ChaveDialogComponent, chave,
-      "Salvar",(data) => {
+      "Incluir",(data) => {
         console.log("OK", data);
         const chaves = [...this.chavesDto, data];
         this.salvarChave(chaves);
       },
       "Cancelar", (data) =>{
         console.log("Cancelar", data);
-      }
+      }, '25%', '25%'
+    )
+  }
+
+  exibirQRCode(chave: ChaveDto) {
+    this.messageService.addDialogYesNo(
+      ChaveQrcodeComponent, chave,
+      "FECHAR",(data) => {
+      },
+      undefined,undefined, '300px', '30px'
     )
   }
 }

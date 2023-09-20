@@ -14,6 +14,8 @@ import {LocalResolve} from "./shared/local-resolve.service";
 import {TipoModule} from "../tipo/tipo.module";
 import {ChaveComponent} from "./gerenciar-local/chave/chave.component";
 import {ChaveDialogComponent} from './gerenciar-local/chave/chave-dialog/chave-dialog.component';
+import {QRCodeModule} from "angularx-qrcode";
+import { ChaveQrcodeComponent } from './gerenciar-local/chave/chave-qrcode/chave-qrcode.component';
 
 
 @NgModule({
@@ -22,18 +24,20 @@ import {ChaveDialogComponent} from './gerenciar-local/chave/chave-dialog/chave-d
     FormLocalComponent,
     GerenciarLocalComponent,
     ChaveComponent,
-    ChaveDialogComponent
+    ChaveDialogComponent,
+    ChaveQrcodeComponent
   ],
-  imports: [
-    CommonModule,
-    MaterialModule,
-    MessageModule,
-    FormsModule,
-    ReactiveFormsModule,
-    RouterModule.forChild(localRoutes),
-    ValidationModule,
-    TipoModule
-  ],
+    imports: [
+        CommonModule,
+        MaterialModule,
+        MessageModule,
+        FormsModule,
+        ReactiveFormsModule,
+        RouterModule.forChild(localRoutes),
+        ValidationModule,
+        TipoModule,
+        QRCodeModule
+    ],
   exports: [
     ChaveComponent
   ],

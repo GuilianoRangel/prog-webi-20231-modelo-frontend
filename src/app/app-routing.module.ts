@@ -7,12 +7,13 @@ import {AdministracaoRoutes} from "./adminmodule/administracao.routing";
 import {DocumentacaoComponent} from "./pages/documentacao/documentacao.component";
 import {HomeSharedKeysComponent} from "./pages/home/home-shared-keys.component";
 import {localRoutes} from "./pages/local/local-routing.module";
+import {AmigoRoutes} from "./pages/amigo/amigo-routing.module";
 
 const routes: Routes = [
   {
     path: "",
     component: HomeComponent,
-    children: [...tipoRoutes, ...AdministracaoRoutes, ...localRoutes,
+    children: [...AmigoRoutes,...tipoRoutes, ...AdministracaoRoutes, ...localRoutes,
       { path: '', redirectTo: 'home', pathMatch: 'full' },
       {
         path: 'home',

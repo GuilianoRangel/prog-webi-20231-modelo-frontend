@@ -11,6 +11,7 @@ export { GrupoDto } from './models/grupo-dto';
 export { GrupoFuncionalidadeDto } from './models/grupo-funcionalidade-dto';
 export { CredencialDto } from './models/credencial-dto';
 export { UsuarioSenhaDto } from './models/usuario-senha-dto';
+export { AmigoDto } from './models/amigo-dto';
 export { AuthDto } from './models/auth-dto';
 export { FiltroUsuarioDto } from './models/filtro-usuario-dto';
 export { ModuloSistemaDto } from './models/modulo-sistema-dto';
