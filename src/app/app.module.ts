@@ -1,4 +1,4 @@
-import {CUSTOM_ELEMENTS_SCHEMA, NgModule, NO_ERRORS_SCHEMA} from '@angular/core';
+import {CUSTOM_ELEMENTS_SCHEMA, LOCALE_ID, NgModule, NO_ERRORS_SCHEMA} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 
 import {AppRoutingModule} from './app-routing.module';
@@ -23,6 +23,9 @@ import {HomeSharedKeysComponent} from "./pages/home/home-shared-keys.component";
 import {LocalModule} from "./pages/local/local.module";
 import {AmigoModule} from "./pages/amigo/amigo.module";
 import {QRCodeModule} from "angularx-qrcode";
+import { registerLocaleData } from '@angular/common';
+import localeBr from '@angular/common/locales/pt';
+import { DateFnsModule } from 'ngx-date-fns';
 
 @NgModule({
   declarations: [
@@ -50,6 +53,7 @@ import {QRCodeModule} from "angularx-qrcode";
       nameStorage: 'portalSSOSecurityStorage',
       loginRouter: '/acesso/login'
     }),
+    DateFnsModule.forRoot()
   ],
   providers: [
     {provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'outline'}},
@@ -66,9 +70,14 @@ import {QRCodeModule} from "angularx-qrcode";
     {
       provide: ValidationResourceProvider,
       useValue: AppMessage,
+    },
+    {
+      provide: LOCALE_ID, useValue: 'pt'
     }
   ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
 })
 export class AppModule { }
+registerLocaleData(localeBr, 'pt');
+

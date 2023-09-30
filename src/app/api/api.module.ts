@@ -6,8 +6,11 @@ import { ApiConfiguration, ApiConfigurationParams } from './api-configuration';
 
 import { UsuarioApiService } from './services/usuario-api.service';
 import { TipoControllerService } from './services/tipo-controller.service';
+import { PessoaControllerService } from './services/pessoa-controller.service';
 import { LocalControllerService } from './services/local-controller.service';
 import { GrupoApiService } from './services/grupo-api.service';
+import { FuncionarioControllerService } from './services/funcionario-controller.service';
+import { DiscenteControllerService } from './services/discente-controller.service';
 import { AuthApiService } from './services/auth-api.service';
 import { AmigoControllerService } from './services/amigo-controller.service';
 import { ModuloSistemaApiService } from './services/modulo-sistema-api.service';
@@ -22,8 +25,11 @@ import { ModuloSistemaApiService } from './services/modulo-sistema-api.service';
   providers: [
     UsuarioApiService,
     TipoControllerService,
+    PessoaControllerService,
     LocalControllerService,
     GrupoApiService,
+    FuncionarioControllerService,
+    DiscenteControllerService,
     AuthApiService,
     AmigoControllerService,
     ModuloSistemaApiService,

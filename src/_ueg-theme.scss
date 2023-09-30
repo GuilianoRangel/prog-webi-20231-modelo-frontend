@@ -146,6 +146,13 @@ main {
 mat-card{
   padding: 5px;
 }
+.mat-mdc-card-content{
+  padding: 1px;
+}
+
+.mat-mdc-table  .mdc-data-table__header-row {
+  height: 38px;
+}
 
 .mat-button-wrapper{
   .mat-icon {

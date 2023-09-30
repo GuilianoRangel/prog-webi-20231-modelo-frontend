@@ -12,15 +12,15 @@
 
         <!-- Position Column -->
         <ng-container matColumnDef="numero">
-          <th mat-header-cell *matHeaderCellDef  fxFlex> Número </th>
-          <td mat-cell *matCellDef="let element"  fxFlex> {{element.numero}} </td>
+          <th mat-header-cell *matHeaderCellDef  fxFlex fxLayoutAlign="space-around center"> Número </th>
+          <td mat-cell *matCellDef="let element"  fxFlex fxLayoutAlign="space-around center"> {{element.numero}} </td>
         </ng-container>
 
 
         <!-- Ação Column -->
         <ng-container matColumnDef="acao">
-          <th mat-header-cell *matHeaderCellDef fxFlex="185px" fxFlexAlign="center center"> Ação </th>
-          <td mat-cell *matCellDef="let element" fxFlex="185px" fxFlexAlign="center center">
+          <th mat-header-cell *matHeaderCellDef fxFlex="160px" fxFlexAlign="center center" fxLayoutAlign="space-around center"> Ação </th>
+          <td mat-cell *matCellDef="let element" fxFlex="160px" fxFlexAlign="center center" fxLayoutAlign="space-around center">
             <button mat-mini-fab (click)="exibirQRCode(element)">
               <mat-icon>pages</mat-icon>
             </button>

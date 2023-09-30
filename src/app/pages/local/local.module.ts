@@ -16,6 +16,9 @@ import {ChaveComponent} from "./gerenciar-local/chave/chave.component";
 import {ChaveDialogComponent} from './gerenciar-local/chave/chave-dialog/chave-dialog.component';
 import {QRCodeModule} from "angularx-qrcode";
 import { ChaveQrcodeComponent } from './gerenciar-local/chave/chave-qrcode/chave-qrcode.component';
+import { ResponsabilidadeComponent } from './gerenciar-local/responsabilidade/responsabilidade.component';
+import {DateFnsModule} from "ngx-date-fns";
+import { ResponsavelDialogComponent } from './gerenciar-local/responsabilidade/responsavel-dialog/responsavel-dialog.component';
 
 
 @NgModule({
@@ -25,7 +28,9 @@ import { ChaveQrcodeComponent } from './gerenciar-local/chave/chave-qrcode/chave
     GerenciarLocalComponent,
     ChaveComponent,
     ChaveDialogComponent,
-    ChaveQrcodeComponent
+    ChaveQrcodeComponent,
+    ResponsabilidadeComponent,
+    ResponsavelDialogComponent
   ],
     imports: [
         CommonModule,
@@ -36,7 +41,8 @@ import { ChaveQrcodeComponent } from './gerenciar-local/chave/chave-qrcode/chave
         RouterModule.forChild(localRoutes),
         ValidationModule,
         TipoModule,
-        QRCodeModule
+        QRCodeModule,
+        DateFnsModule
     ],
   exports: [
     ChaveComponent

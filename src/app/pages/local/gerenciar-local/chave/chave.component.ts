@@ -16,7 +16,7 @@ import {ChaveQrcodeComponent} from "./chave-qrcode/chave-qrcode.component";
   styleUrls: ['./chave.component.scss']
 })
 export class ChaveComponent implements OnInit{
-  private localDto: LocalDto = { nome: "", numeroSala: 0, chaves:[]};
+  private localDto: LocalDto = { nome: "", numeroSala: 0, chaves:[], responsaveis: []};
   private chavesDto: ChaveDto[] = [];
 
   @Input()
@@ -24,7 +24,7 @@ export class ChaveComponent implements OnInit{
     if(value){
       this.localDto = value;
     }else{
-      this.localDto = { nome: "", numeroSala: 0, chaves:[]}
+      this.localDto = { nome: "", numeroSala: 0, chaves:[], responsaveis: []}
     }
     this.chaves = this.localDto.chaves;
   };

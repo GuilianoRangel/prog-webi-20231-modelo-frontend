@@ -1,6 +1,7 @@
 /* tslint:disable */
 /* eslint-disable */
 import { ChaveDto } from './chave-dto';
+import { ResponsabilidadeDto } from './responsabilidade-dto';
 export interface LocalDto {
 
   /**
@@ -27,4 +28,9 @@ export interface LocalDto {
    * Número identificador da sala
    */
   numeroSala: number;
+
+  /**
+   * Lista de responsaveis do local
+   */
+  responsaveis: Array<ResponsabilidadeDto>;
 }

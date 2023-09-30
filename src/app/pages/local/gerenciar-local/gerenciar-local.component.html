@@ -28,20 +28,15 @@
             </mat-form-field>
           </div>
 
-          <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="0.7%"
+          <div fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="0.7%"
                fxLayoutAlign="center stretch"
           >
-            <div fxLayout="column" fxLayoutGap="1%" fxLayoutGap.xs="2%" fxFlex="50">
+            <div fxLayout="column" fxLayoutGap="1%" fxLayoutGap.xs="2%" fxFlex="30">
                   <app-chave-lista [local]="local" ></app-chave-lista>
             </div>
-            <mat-card fxLayout="column" fxLayoutGap="1%" fxLayoutGap.xs="2%" fxFlex="50">
-              <mat-card-title>
-                <span>Responsáveis pelo Local</span>
-              </mat-card-title>
-              <mat-card-content fxLayout="column" fxLayoutGap="0.7%" fxLayoutGap.xs="3%">
-                asdfas
-              </mat-card-content>
-            </mat-card>
+            <div fxLayout="column" fxLayoutGap="1%" fxLayoutGap.xs="2%" fxFlex="68">
+              <app-responsabilidade [local]="local" ></app-responsabilidade>
+            </div>
           </div>
         </mat-card-content>
       </mat-card>
