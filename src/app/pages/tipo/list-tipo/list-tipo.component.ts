@@ -2,9 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {MatTableDataSource} from "@angular/material/table";
 import {TipoDto} from "../../../api/models/tipo-dto";
 import {TipoControllerService} from "../../../api/services/tipo-controller.service";
-import {MessageResponse} from "../../../api/models/message-response";
-import {MatDialog} from "@angular/material/dialog";
-import {MatSnackBar} from "@angular/material/snack-bar";
 import {MessageService} from "../../../arquitetura/message/message.service";
 
 @Component({
@@ -18,8 +15,6 @@ export class ListTipoComponent implements OnInit {
 
   constructor(
     public tipoService: TipoControllerService,
-    private dialog: MatDialog,
-    private snackBar: MatSnackBar,
     private messageService: MessageService
   ) {
   }
@@ -73,5 +68,9 @@ export class ListTipoComponent implements OnInit {
         this.remover(confirmed.dado);
       }
     });*/
+  }
+
+  showResult($event: any[]) {
+    this.tipoListaDataSource.data = $event;
   }
 }

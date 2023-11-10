@@ -1,0 +1,63 @@
+<mat-card>
+  <mat-card-title fxLayout="row" fxLayoutAlign="space-between stretch">
+    <span>Responsáveis</span>
+    <div fxFlex fxLayout="row" fxFlexOffset="1%" fxLayoutAlign="center center">
+      <mat-label>Todos:</mat-label>
+      <mat-slide-toggle [checked]="mostrarTodos"
+                        (change)="toggleMostrarTodos()"
+                        title="{{ (mostrarTodos ? 'Monstrando todos' : 'Monstrando ativos') }}"
+      >
+      </mat-slide-toggle>
+    </div>
+    <a mat-mini-fab title="Adicionar2" class="btn-primary add-chave"
+       (click)="adicionarResponsavel()"
+    >
+      <mat-icon>add</mat-icon>
+    </a>
+  </mat-card-title>
+  <mat-card-content fxLayout="column" fxLayoutGap="0.7%" fxLayoutGap.xs="3%">
+    <table mat-table [dataSource]="responsaveisListaDataSource">
+
+      <!-- Position Column -->
+      <ng-container matColumnDef="nome">
+        <th mat-header-cell *matHeaderCellDef  fxFlex fxLayoutAlign="start center"> Nome </th>
+        <td mat-cell *matCellDef="let element"  fxFlex fxLayoutAlign="start center"> {{element.funcionario?.nome}} </td>
+      </ng-container>
+
+      <!-- Position Column -->
+      <ng-container matColumnDef="alocacao">
+        <th mat-header-cell *matHeaderCellDef  fxFlex fxLayoutAlign="start center" fxHide.lt-sm> Alocação </th>
+        <td mat-cell *matCellDef="let element"  fxFlex fxLayoutAlign="start center" fxHide.lt-sm> {{element.funcionario?.cargo_nome}}( {{ element.funcionario?.alocacao }} ) </td>
+      </ng-container>
+
+      <!-- Position Column -->
+      <ng-container matColumnDef="iniVigencia">
+        <th mat-header-cell *matHeaderCellDef  fxFlex="85px" fxLayoutAlign="space-around center"> Ínicio </th>
+        <td mat-cell *matCellDef="let element"  fxFlex="85px" fxLayoutAlign="space-around center"> {{parseISO(element.dataInicio||'' ) | dfnsFormat: 'dd/MM/yyyy'}} </td>
+      </ng-container>
+
+      <!-- Position Column -->
+      <ng-container matColumnDef="fimVigencia">
+        <th mat-header-cell *matHeaderCellDef  fxFlex="85px" fxLayoutAlign="space-around center"> Fim </th>
+        <td mat-cell *matCellDef="let element"  fxFlex="85px" fxLayoutAlign="space-around center"> {{parseISO(element.dataFim||'') | dfnsFormat: 'dd/MM/yyyy'}} </td>
+      </ng-container>
+
+
+      <!-- Ação Column -->
+      <ng-container matColumnDef="acao">
+        <th mat-header-cell *matHeaderCellDef fxFlex="120px" fxFlexAlign="center center" fxLayoutAlign="space-around center"> Ação </th>
+        <td mat-cell *matCellDef="let element" fxFlex="120px" fxFlexAlign="center center" fxLayoutAlign="space-around center">
+          <button mat-mini-fab (click)="confirmarFinalizarResponsabilidade(element.sequencia)">
+            <mat-icon>delete_forever</mat-icon>
+          </button>
+          <button mat-mini-fab class="btnEditar" (click)="editarResponsavel(element)">
+            <mat-icon>edit</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="colunasMostrar; sticky: true"></tr>
+      <tr mat-row *matRowDef="let row; columns: colunasMostrar;"></tr>
+    </table>
+  </mat-card-content>
+</mat-card>

@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {MatTableDataSource} from "@angular/material/table";
-import {TipoDto} from "../../../api/models/tipo-dto";
 import {MatDialog} from "@angular/material/dialog";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {MessageService} from "../../../arquitetura/message/message.service";
@@ -73,5 +72,8 @@ export class ListAmigoComponent implements OnInit {
         this.remover(confirmed.dado);
       }
     });*/
+  }
+  showResult($event: any[]) {
+    this.amigoListaDataSource.data = $event;
   }
 }

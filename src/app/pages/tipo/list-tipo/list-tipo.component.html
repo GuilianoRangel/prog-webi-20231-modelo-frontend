@@ -1,3 +1,5 @@
+<div>
+  <app-search-component [controller]="tipoService"  (onSearchResult)="showResult($event)"/>
 <section class="example-container mat-elevation-z8" tabindex="0">
   <table mat-table [dataSource]="tipoListaDataSource">
 
@@ -42,3 +44,4 @@
     <tr mat-row *matRowDef="let row; columns: colunasMostrar;"></tr>
   </table>
 </section>
+</div>
