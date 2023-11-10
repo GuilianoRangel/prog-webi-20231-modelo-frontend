@@ -9,14 +9,14 @@ import { RequestBuilder } from '../request-builder';
 import { Observable } from 'rxjs';
 import { map, filter } from 'rxjs/operators';
 
-import { AmigoDto } from '../models/amigo-dto';
+import { PessoaDto } from '../models/pessoa-dto';
 import { SearchField } from '../models/search-field';
 import { SearchFieldValue } from '../models/search-field-value';
 
 @Injectable({
   providedIn: 'root',
 })
-export class AmigoControllerService extends BaseService {
+export class PessoaControllerService extends BaseService {
   constructor(
     config: ApiConfiguration,
     http: HttpClient
@@ -25,26 +25,26 @@ export class AmigoControllerService extends BaseService {
   }
 
   /**
-   * Path part for operation amigoControllerObterPorId
+   * Path part for operation pessoaControllerObterPorId
    */
-  static readonly AmigoControllerObterPorIdPath = '/api/v1/amigo/{id}';
+  static readonly PessoaControllerObterPorIdPath = '/api/v1/pessoa/{id}';
 
   /**
    * Obter os dados completos de uma entidiade pelo id informado!
    *
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `amigoControllerObterPorId()` instead.
+   * To access only the response body, use `pessoaControllerObterPorId()` instead.
    *
    * This method doesn't expect any request body.
    */
-  amigoControllerObterPorId$Response(params: {
+  pessoaControllerObterPorId$Response(params: {
     id: number;
   },
   context?: HttpContext
 
 ): Observable<StrictHttpResponse<any>> {
 
-    const rb = new RequestBuilder(this.rootUrl, AmigoControllerService.AmigoControllerObterPorIdPath, 'get');
+    const rb = new RequestBuilder(this.rootUrl, PessoaControllerService.PessoaControllerObterPorIdPath, 'get');
     if (params) {
       rb.path('id', params.id, {});
     }
@@ -65,44 +65,44 @@ export class AmigoControllerService extends BaseService {
    * Obter os dados completos de uma entidiade pelo id informado!
    *
    * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `amigoControllerObterPorId$Response()` instead.
+   * To access the full response (for headers, for example), `pessoaControllerObterPorId$Response()` instead.
    *
    * This method doesn't expect any request body.
    */
-  amigoControllerObterPorId(params: {
+  pessoaControllerObterPorId(params: {
     id: number;
   },
   context?: HttpContext
 
 ): Observable<any> {
 
-    return this.amigoControllerObterPorId$Response(params,context).pipe(
+    return this.pessoaControllerObterPorId$Response(params,context).pipe(
       map((r: StrictHttpResponse<any>) => r.body as any)
     );
   }
 
   /**
-   * Path part for operation amigoControllerAlterar
+   * Path part for operation pessoaControllerAlterar
    */
-  static readonly AmigoControllerAlterarPath = '/api/v1/amigo/{id}';
+  static readonly PessoaControllerAlterarPath = '/api/v1/pessoa/{id}';
 
   /**
    * Método utilizado para altlerar os dados de uma entidiade
    *
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `amigoControllerAlterar()` instead.
+   * To access only the response body, use `pessoaControllerAlterar()` instead.
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  amigoControllerAlterar$Response(params: {
+  pessoaControllerAlterar$Response(params: {
     id: number;
-    body: AmigoDto
+    body: PessoaDto
   },
   context?: HttpContext
 
 ): Observable<StrictHttpResponse<any>> {
 
-    const rb = new RequestBuilder(this.rootUrl, AmigoControllerService.AmigoControllerAlterarPath, 'put');
+    const rb = new RequestBuilder(this.rootUrl, PessoaControllerService.PessoaControllerAlterarPath, 'put');
     if (params) {
       rb.path('id', params.id, {});
       rb.body(params.body, 'application/json');
@@ -124,44 +124,44 @@ export class AmigoControllerService extends BaseService {
    * Método utilizado para altlerar os dados de uma entidiade
    *
    * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `amigoControllerAlterar$Response()` instead.
+   * To access the full response (for headers, for example), `pessoaControllerAlterar$Response()` instead.
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  amigoControllerAlterar(params: {
+  pessoaControllerAlterar(params: {
     id: number;
-    body: AmigoDto
+    body: PessoaDto
   },
   context?: HttpContext
 
 ): Observable<any> {
 
-    return this.amigoControllerAlterar$Response(params,context).pipe(
+    return this.pessoaControllerAlterar$Response(params,context).pipe(
       map((r: StrictHttpResponse<any>) => r.body as any)
     );
   }
 
   /**
-   * Path part for operation amigoControllerRemover
+   * Path part for operation pessoaControllerRemover
    */
-  static readonly AmigoControllerRemoverPath = '/api/v1/amigo/{id}';
+  static readonly PessoaControllerRemoverPath = '/api/v1/pessoa/{id}';
 
   /**
    * Método utilizado para remover uma entidiade pela id informado
    *
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `amigoControllerRemover()` instead.
+   * To access only the response body, use `pessoaControllerRemover()` instead.
    *
    * This method doesn't expect any request body.
    */
-  amigoControllerRemover$Response(params: {
+  pessoaControllerRemover$Response(params: {
     id: number;
   },
   context?: HttpContext
 
 ): Observable<StrictHttpResponse<any>> {
 
-    const rb = new RequestBuilder(this.rootUrl, AmigoControllerService.AmigoControllerRemoverPath, 'delete');
+    const rb = new RequestBuilder(this.rootUrl, PessoaControllerService.PessoaControllerRemoverPath, 'delete');
     if (params) {
       rb.path('id', params.id, {});
     }
@@ -182,42 +182,42 @@ export class AmigoControllerService extends BaseService {
    * Método utilizado para remover uma entidiade pela id informado
    *
    * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `amigoControllerRemover$Response()` instead.
+   * To access the full response (for headers, for example), `pessoaControllerRemover$Response()` instead.
    *
    * This method doesn't expect any request body.
    */
-  amigoControllerRemover(params: {
+  pessoaControllerRemover(params: {
     id: number;
   },
   context?: HttpContext
 
 ): Observable<any> {
 
-    return this.amigoControllerRemover$Response(params,context).pipe(
+    return this.pessoaControllerRemover$Response(params,context).pipe(
       map((r: StrictHttpResponse<any>) => r.body as any)
     );
   }
 
   /**
-   * Path part for operation amigoControllerListAll
+   * Path part for operation pessoaControllerListAll
    */
-  static readonly AmigoControllerListAllPath = '/api/v1/amigo';
+  static readonly PessoaControllerListAllPath = '/api/v1/pessoa';
 
   /**
    * Listagem Geral
    *
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `amigoControllerListAll()` instead.
+   * To access only the response body, use `pessoaControllerListAll()` instead.
    *
    * This method doesn't expect any request body.
    */
-  amigoControllerListAll$Response(params?: {
+  pessoaControllerListAll$Response(params?: {
   },
   context?: HttpContext
 
 ): Observable<StrictHttpResponse<any>> {
 
-    const rb = new RequestBuilder(this.rootUrl, AmigoControllerService.AmigoControllerListAllPath, 'get');
+    const rb = new RequestBuilder(this.rootUrl, PessoaControllerService.PessoaControllerListAllPath, 'get');
     if (params) {
     }
 
@@ -237,42 +237,42 @@ export class AmigoControllerService extends BaseService {
    * Listagem Geral
    *
    * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `amigoControllerListAll$Response()` instead.
+   * To access the full response (for headers, for example), `pessoaControllerListAll$Response()` instead.
    *
    * This method doesn't expect any request body.
    */
-  amigoControllerListAll(params?: {
+  pessoaControllerListAll(params?: {
   },
   context?: HttpContext
 
 ): Observable<any> {
 
-    return this.amigoControllerListAll$Response(params,context).pipe(
+    return this.pessoaControllerListAll$Response(params,context).pipe(
       map((r: StrictHttpResponse<any>) => r.body as any)
     );
   }
 
   /**
-   * Path part for operation amigoControllerIncluir
+   * Path part for operation pessoaControllerIncluir
    */
-  static readonly AmigoControllerIncluirPath = '/api/v1/amigo';
+  static readonly PessoaControllerIncluirPath = '/api/v1/pessoa';
 
   /**
    * Método utilizado para realizar a inclusão de um entidade
    *
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `amigoControllerIncluir()` instead.
+   * To access only the response body, use `pessoaControllerIncluir()` instead.
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  amigoControllerIncluir$Response(params: {
-    body: AmigoDto
+  pessoaControllerIncluir$Response(params: {
+    body: PessoaDto
   },
   context?: HttpContext
 
 ): Observable<StrictHttpResponse<any>> {
 
-    const rb = new RequestBuilder(this.rootUrl, AmigoControllerService.AmigoControllerIncluirPath, 'post');
+    const rb = new RequestBuilder(this.rootUrl, PessoaControllerService.PessoaControllerIncluirPath, 'post');
     if (params) {
       rb.body(params.body, 'application/json');
     }
@@ -293,42 +293,42 @@ export class AmigoControllerService extends BaseService {
    * Método utilizado para realizar a inclusão de um entidade
    *
    * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `amigoControllerIncluir$Response()` instead.
+   * To access the full response (for headers, for example), `pessoaControllerIncluir$Response()` instead.
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  amigoControllerIncluir(params: {
-    body: AmigoDto
+  pessoaControllerIncluir(params: {
+    body: PessoaDto
   },
   context?: HttpContext
 
 ): Observable<any> {
 
-    return this.amigoControllerIncluir$Response(params,context).pipe(
+    return this.pessoaControllerIncluir$Response(params,context).pipe(
       map((r: StrictHttpResponse<any>) => r.body as any)
     );
   }
 
   /**
-   * Path part for operation amigoControllerSearchFieldsList
+   * Path part for operation pessoaControllerSearchFieldsList
    */
-  static readonly AmigoControllerSearchFieldsListPath = '/api/v1/amigo/search-fields';
+  static readonly PessoaControllerSearchFieldsListPath = '/api/v1/pessoa/search-fields';
 
   /**
    * Listagem dos campos de busca
    *
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `amigoControllerSearchFieldsList()` instead.
+   * To access only the response body, use `pessoaControllerSearchFieldsList()` instead.
    *
    * This method doesn't expect any request body.
    */
-  amigoControllerSearchFieldsList$Response(params?: {
+  pessoaControllerSearchFieldsList$Response(params?: {
   },
   context?: HttpContext
 
 ): Observable<StrictHttpResponse<Array<SearchField>>> {
 
-    const rb = new RequestBuilder(this.rootUrl, AmigoControllerService.AmigoControllerSearchFieldsListPath, 'get');
+    const rb = new RequestBuilder(this.rootUrl, PessoaControllerService.PessoaControllerSearchFieldsListPath, 'get');
     if (params) {
     }
 
@@ -348,42 +348,42 @@ export class AmigoControllerService extends BaseService {
    * Listagem dos campos de busca
    *
    * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `amigoControllerSearchFieldsList$Response()` instead.
+   * To access the full response (for headers, for example), `pessoaControllerSearchFieldsList$Response()` instead.
    *
    * This method doesn't expect any request body.
    */
-  amigoControllerSearchFieldsList(params?: {
+  pessoaControllerSearchFieldsList(params?: {
   },
   context?: HttpContext
 
 ): Observable<Array<SearchField>> {
 
-    return this.amigoControllerSearchFieldsList$Response(params,context).pipe(
+    return this.pessoaControllerSearchFieldsList$Response(params,context).pipe(
       map((r: StrictHttpResponse<Array<SearchField>>) => r.body as Array<SearchField>)
     );
   }
 
   /**
-   * Path part for operation amigoControllerSearchFieldsAction
+   * Path part for operation pessoaControllerSearchFieldsAction
    */
-  static readonly AmigoControllerSearchFieldsActionPath = '/api/v1/amigo/search-fields';
+  static readonly PessoaControllerSearchFieldsActionPath = '/api/v1/pessoa/search-fields';
 
   /**
    * Realiza a busca pelos valores dos campos informados
    *
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `amigoControllerSearchFieldsAction()` instead.
+   * To access only the response body, use `pessoaControllerSearchFieldsAction()` instead.
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  amigoControllerSearchFieldsAction$Response(params: {
+  pessoaControllerSearchFieldsAction$Response(params: {
     body: Array<SearchFieldValue>
   },
   context?: HttpContext
 
 ): Observable<StrictHttpResponse<any>> {
 
-    const rb = new RequestBuilder(this.rootUrl, AmigoControllerService.AmigoControllerSearchFieldsActionPath, 'post');
+    const rb = new RequestBuilder(this.rootUrl, PessoaControllerService.PessoaControllerSearchFieldsActionPath, 'post');
     if (params) {
       rb.body(params.body, 'application/json');
     }
@@ -404,18 +404,18 @@ export class AmigoControllerService extends BaseService {
    * Realiza a busca pelos valores dos campos informados
    *
    * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `amigoControllerSearchFieldsAction$Response()` instead.
+   * To access the full response (for headers, for example), `pessoaControllerSearchFieldsAction$Response()` instead.
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  amigoControllerSearchFieldsAction(params: {
+  pessoaControllerSearchFieldsAction(params: {
     body: Array<SearchFieldValue>
   },
   context?: HttpContext
 
 ): Observable<any> {
 
-    return this.amigoControllerSearchFieldsAction$Response(params,context).pipe(
+    return this.pessoaControllerSearchFieldsAction$Response(params,context).pipe(
       map((r: StrictHttpResponse<any>) => r.body as any)
     );
   }

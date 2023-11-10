@@ -9,14 +9,14 @@ import { RequestBuilder } from '../request-builder';
 import { Observable } from 'rxjs';
 import { map, filter } from 'rxjs/operators';
 
-import { AmigoDto } from '../models/amigo-dto';
+import { DiscenteDto } from '../models/discente-dto';
 import { SearchField } from '../models/search-field';
 import { SearchFieldValue } from '../models/search-field-value';
 
 @Injectable({
   providedIn: 'root',
 })
-export class AmigoControllerService extends BaseService {
+export class DiscenteControllerService extends BaseService {
   constructor(
     config: ApiConfiguration,
     http: HttpClient
@@ -25,26 +25,26 @@ export class AmigoControllerService extends BaseService {
   }
 
   /**
-   * Path part for operation amigoControllerObterPorId
+   * Path part for operation discenteControllerObterPorId
    */
-  static readonly AmigoControllerObterPorIdPath = '/api/v1/amigo/{id}';
+  static readonly DiscenteControllerObterPorIdPath = '/api/v1/discente/{id}';
 
   /**
    * Obter os dados completos de uma entidiade pelo id informado!
    *
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `amigoControllerObterPorId()` instead.
+   * To access only the response body, use `discenteControllerObterPorId()` instead.
    *
    * This method doesn't expect any request body.
    */
-  amigoControllerObterPorId$Response(params: {
+  discenteControllerObterPorId$Response(params: {
     id: number;
   },
   context?: HttpContext
 
 ): Observable<StrictHttpResponse<any>> {
 
-    const rb = new RequestBuilder(this.rootUrl, AmigoControllerService.AmigoControllerObterPorIdPath, 'get');
+    const rb = new RequestBuilder(this.rootUrl, DiscenteControllerService.DiscenteControllerObterPorIdPath, 'get');
     if (params) {
       rb.path('id', params.id, {});
     }
@@ -65,44 +65,44 @@ export class AmigoControllerService extends BaseService {
    * Obter os dados completos de uma entidiade pelo id informado!
    *
    * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `amigoControllerObterPorId$Response()` instead.
+   * To access the full response (for headers, for example), `discenteControllerObterPorId$Response()` instead.
    *
    * This method doesn't expect any request body.
    */
-  amigoControllerObterPorId(params: {
+  discenteControllerObterPorId(params: {
     id: number;
   },
   context?: HttpContext
 
 ): Observable<any> {
 
-    return this.amigoControllerObterPorId$Response(params,context).pipe(
+    return this.discenteControllerObterPorId$Response(params,context).pipe(
       map((r: StrictHttpResponse<any>) => r.body as any)
     );
   }
 
   /**
-   * Path part for operation amigoControllerAlterar
+   * Path part for operation discenteControllerAlterar
    */
-  static readonly AmigoControllerAlterarPath = '/api/v1/amigo/{id}';
+  static readonly DiscenteControllerAlterarPath = '/api/v1/discente/{id}';
 
   /**
    * Método utilizado para altlerar os dados de uma entidiade
    *
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `amigoControllerAlterar()` instead.
+   * To access only the response body, use `discenteControllerAlterar()` instead.
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  amigoControllerAlterar$Response(params: {
+  discenteControllerAlterar$Response(params: {
     id: number;
-    body: AmigoDto
+    body: DiscenteDto
   },
   context?: HttpContext
 
 ): Observable<StrictHttpResponse<any>> {
 
-    const rb = new RequestBuilder(this.rootUrl, AmigoControllerService.AmigoControllerAlterarPath, 'put');
+    const rb = new RequestBuilder(this.rootUrl, DiscenteControllerService.DiscenteControllerAlterarPath, 'put');
     if (params) {
       rb.path('id', params.id, {});
       rb.body(params.body, 'application/json');
@@ -124,44 +124,44 @@ export class AmigoControllerService extends BaseService {
    * Método utilizado para altlerar os dados de uma entidiade
    *
    * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `amigoControllerAlterar$Response()` instead.
+   * To access the full response (for headers, for example), `discenteControllerAlterar$Response()` instead.
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  amigoControllerAlterar(params: {
+  discenteControllerAlterar(params: {
     id: number;
-    body: AmigoDto
+    body: DiscenteDto
   },
   context?: HttpContext
 
 ): Observable<any> {
 
-    return this.amigoControllerAlterar$Response(params,context).pipe(
+    return this.discenteControllerAlterar$Response(params,context).pipe(
       map((r: StrictHttpResponse<any>) => r.body as any)
     );
   }
 
   /**
-   * Path part for operation amigoControllerRemover
+   * Path part for operation discenteControllerRemover
    */
-  static readonly AmigoControllerRemoverPath = '/api/v1/amigo/{id}';
+  static readonly DiscenteControllerRemoverPath = '/api/v1/discente/{id}';
 
   /**
    * Método utilizado para remover uma entidiade pela id informado
    *
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `amigoControllerRemover()` instead.
+   * To access only the response body, use `discenteControllerRemover()` instead.
    *
    * This method doesn't expect any request body.
    */
-  amigoControllerRemover$Response(params: {
+  discenteControllerRemover$Response(params: {
     id: number;
   },
   context?: HttpContext
 
 ): Observable<StrictHttpResponse<any>> {
 
-    const rb = new RequestBuilder(this.rootUrl, AmigoControllerService.AmigoControllerRemoverPath, 'delete');
+    const rb = new RequestBuilder(this.rootUrl, DiscenteControllerService.DiscenteControllerRemoverPath, 'delete');
     if (params) {
       rb.path('id', params.id, {});
     }
@@ -182,42 +182,42 @@ export class AmigoControllerService extends BaseService {
    * Método utilizado para remover uma entidiade pela id informado
    *
    * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `amigoControllerRemover$Response()` instead.
+   * To access the full response (for headers, for example), `discenteControllerRemover$Response()` instead.
    *
    * This method doesn't expect any request body.
    */
-  amigoControllerRemover(params: {
+  discenteControllerRemover(params: {
     id: number;
   },
   context?: HttpContext
 
 ): Observable<any> {
 
-    return this.amigoControllerRemover$Response(params,context).pipe(
+    return this.discenteControllerRemover$Response(params,context).pipe(
       map((r: StrictHttpResponse<any>) => r.body as any)
     );
   }
 
   /**
-   * Path part for operation amigoControllerListAll
+   * Path part for operation discenteControllerListAll
    */
-  static readonly AmigoControllerListAllPath = '/api/v1/amigo';
+  static readonly DiscenteControllerListAllPath = '/api/v1/discente';
 
   /**
    * Listagem Geral
    *
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `amigoControllerListAll()` instead.
+   * To access only the response body, use `discenteControllerListAll()` instead.
    *
    * This method doesn't expect any request body.
    */
-  amigoControllerListAll$Response(params?: {
+  discenteControllerListAll$Response(params?: {
   },
   context?: HttpContext
 
 ): Observable<StrictHttpResponse<any>> {
 
-    const rb = new RequestBuilder(this.rootUrl, AmigoControllerService.AmigoControllerListAllPath, 'get');
+    const rb = new RequestBuilder(this.rootUrl, DiscenteControllerService.DiscenteControllerListAllPath, 'get');
     if (params) {
     }
 
@@ -237,42 +237,42 @@ export class AmigoControllerService extends BaseService {
    * Listagem Geral
    *
    * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `amigoControllerListAll$Response()` instead.
+   * To access the full response (for headers, for example), `discenteControllerListAll$Response()` instead.
    *
    * This method doesn't expect any request body.
    */
-  amigoControllerListAll(params?: {
+  discenteControllerListAll(params?: {
   },
   context?: HttpContext
 
 ): Observable<any> {
 
-    return this.amigoControllerListAll$Response(params,context).pipe(
+    return this.discenteControllerListAll$Response(params,context).pipe(
       map((r: StrictHttpResponse<any>) => r.body as any)
     );
   }
 
   /**
-   * Path part for operation amigoControllerIncluir
+   * Path part for operation discenteControllerIncluir
    */
-  static readonly AmigoControllerIncluirPath = '/api/v1/amigo';
+  static readonly DiscenteControllerIncluirPath = '/api/v1/discente';
 
   /**
    * Método utilizado para realizar a inclusão de um entidade
    *
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `amigoControllerIncluir()` instead.
+   * To access only the response body, use `discenteControllerIncluir()` instead.
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  amigoControllerIncluir$Response(params: {
-    body: AmigoDto
+  discenteControllerIncluir$Response(params: {
+    body: DiscenteDto
   },
   context?: HttpContext
 
 ): Observable<StrictHttpResponse<any>> {
 
-    const rb = new RequestBuilder(this.rootUrl, AmigoControllerService.AmigoControllerIncluirPath, 'post');
+    const rb = new RequestBuilder(this.rootUrl, DiscenteControllerService.DiscenteControllerIncluirPath, 'post');
     if (params) {
       rb.body(params.body, 'application/json');
     }
@@ -293,42 +293,42 @@ export class AmigoControllerService extends BaseService {
    * Método utilizado para realizar a inclusão de um entidade
    *
    * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `amigoControllerIncluir$Response()` instead.
+   * To access the full response (for headers, for example), `discenteControllerIncluir$Response()` instead.
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  amigoControllerIncluir(params: {
-    body: AmigoDto
+  discenteControllerIncluir(params: {
+    body: DiscenteDto
   },
   context?: HttpContext
 
 ): Observable<any> {
 
-    return this.amigoControllerIncluir$Response(params,context).pipe(
+    return this.discenteControllerIncluir$Response(params,context).pipe(
       map((r: StrictHttpResponse<any>) => r.body as any)
     );
   }
 
   /**
-   * Path part for operation amigoControllerSearchFieldsList
+   * Path part for operation discenteControllerSearchFieldsList
    */
-  static readonly AmigoControllerSearchFieldsListPath = '/api/v1/amigo/search-fields';
+  static readonly DiscenteControllerSearchFieldsListPath = '/api/v1/discente/search-fields';
 
   /**
    * Listagem dos campos de busca
    *
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `amigoControllerSearchFieldsList()` instead.
+   * To access only the response body, use `discenteControllerSearchFieldsList()` instead.
    *
    * This method doesn't expect any request body.
    */
-  amigoControllerSearchFieldsList$Response(params?: {
+  discenteControllerSearchFieldsList$Response(params?: {
   },
   context?: HttpContext
 
 ): Observable<StrictHttpResponse<Array<SearchField>>> {
 
-    const rb = new RequestBuilder(this.rootUrl, AmigoControllerService.AmigoControllerSearchFieldsListPath, 'get');
+    const rb = new RequestBuilder(this.rootUrl, DiscenteControllerService.DiscenteControllerSearchFieldsListPath, 'get');
     if (params) {
     }
 
@@ -348,42 +348,42 @@ export class AmigoControllerService extends BaseService {
    * Listagem dos campos de busca
    *
    * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `amigoControllerSearchFieldsList$Response()` instead.
+   * To access the full response (for headers, for example), `discenteControllerSearchFieldsList$Response()` instead.
    *
    * This method doesn't expect any request body.
    */
-  amigoControllerSearchFieldsList(params?: {
+  discenteControllerSearchFieldsList(params?: {
   },
   context?: HttpContext
 
 ): Observable<Array<SearchField>> {
 
-    return this.amigoControllerSearchFieldsList$Response(params,context).pipe(
+    return this.discenteControllerSearchFieldsList$Response(params,context).pipe(
       map((r: StrictHttpResponse<Array<SearchField>>) => r.body as Array<SearchField>)
     );
   }
 
   /**
-   * Path part for operation amigoControllerSearchFieldsAction
+   * Path part for operation discenteControllerSearchFieldsAction
    */
-  static readonly AmigoControllerSearchFieldsActionPath = '/api/v1/amigo/search-fields';
+  static readonly DiscenteControllerSearchFieldsActionPath = '/api/v1/discente/search-fields';
 
   /**
    * Realiza a busca pelos valores dos campos informados
    *
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `amigoControllerSearchFieldsAction()` instead.
+   * To access only the response body, use `discenteControllerSearchFieldsAction()` instead.
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  amigoControllerSearchFieldsAction$Response(params: {
+  discenteControllerSearchFieldsAction$Response(params: {
     body: Array<SearchFieldValue>
   },
   context?: HttpContext
 
 ): Observable<StrictHttpResponse<any>> {
 
-    const rb = new RequestBuilder(this.rootUrl, AmigoControllerService.AmigoControllerSearchFieldsActionPath, 'post');
+    const rb = new RequestBuilder(this.rootUrl, DiscenteControllerService.DiscenteControllerSearchFieldsActionPath, 'post');
     if (params) {
       rb.body(params.body, 'application/json');
     }
@@ -404,18 +404,18 @@ export class AmigoControllerService extends BaseService {
    * Realiza a busca pelos valores dos campos informados
    *
    * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `amigoControllerSearchFieldsAction$Response()` instead.
+   * To access the full response (for headers, for example), `discenteControllerSearchFieldsAction$Response()` instead.
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  amigoControllerSearchFieldsAction(params: {
+  discenteControllerSearchFieldsAction(params: {
     body: Array<SearchFieldValue>
   },
   context?: HttpContext
 
 ): Observable<any> {
 
-    return this.amigoControllerSearchFieldsAction$Response(params,context).pipe(
+    return this.discenteControllerSearchFieldsAction$Response(params,context).pipe(
       map((r: StrictHttpResponse<any>) => r.body as any)
     );
   }
