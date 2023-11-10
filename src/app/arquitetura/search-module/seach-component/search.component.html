@@ -1,0 +1,41 @@
+<mat-card>
+  <mat-card-title>Busca Dados</mat-card-title>
+  <mat-card-content>
+      <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="5">
+        <mat-form-field fxFlex="20">
+          <mat-label>Campo</mat-label>
+          <mat-select [(ngModel)]="searchParameter" >
+            <mat-option *ngFor="let parameter of searchFieldsParamters" [value]="parameter">{{parameter.label}}</mat-option>
+          </mat-select>
+          <mat-error validationMessage></mat-error>
+        </mat-form-field>
+        <mat-form-field fxFlex="20">
+          <mat-label>Condição</mat-label>
+          <mat-select [(ngModel)]="searchConditionKey" >
+            <mat-option *ngFor="let parameter of searchConditionKeys" [value]="parameter">{{SearchType[parameter]}} </mat-option>
+          </mat-select>
+          <mat-error validationMessage></mat-error>
+        </mat-form-field>
+        <mat-form-field fxFlex *ngIf="showFieldSearch">
+          <mat-label>Busca</mat-label>
+          <input matInput placeholder="Informe o valor da busca" title="Busca"
+                 [(ngModel)]="searchValue" name="nome"  required maxlength="50"
+          >
+          <mat-error validationMessage ></mat-error>
+        </mat-form-field>
+        <mat-form-field fxFlex  *ngIf="!showFieldSearch">
+          <mat-label>Lista de Valores</mat-label>
+          <mat-select [(ngModel)]="searchValue" >
+            <mat-option *ngFor="let parameter of searchParameter.valueList" [value]="parameter.id">{{parameter.description}} </mat-option>
+          </mat-select>
+          <mat-error validationMessage></mat-error>
+        </mat-form-field>
+      </div>
+  </mat-card-content>
+  <mat-card-actions fxLayoutAlign="end center">
+    <div fxFlex="20" fxLayout="row" fxLayoutAlign="space-between center">
+      <button mat-button mat-raised-button class="mat-primary" (click)="searchAll()">Todos</button>
+      <button mat-button mat-raised-button class="mat-primary" (click)="search()">Busca</button>
+    </div>
+  </mat-card-actions>
+</mat-card>
