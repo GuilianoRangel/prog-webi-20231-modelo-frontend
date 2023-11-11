@@ -16,17 +16,17 @@
           </mat-select>
           <mat-error validationMessage></mat-error>
         </mat-form-field>
-        <mat-form-field fxFlex *ngIf="showFieldSearch">
+        <mat-form-field fxFlex *ngIf="!showFieldSearch">
           <mat-label>Busca</mat-label>
           <input matInput placeholder="Informe o valor da busca" title="Busca"
                  [(ngModel)]="searchValue" name="nome"  required maxlength="50"
           >
           <mat-error validationMessage ></mat-error>
         </mat-form-field>
-        <mat-form-field fxFlex  *ngIf="!showFieldSearch">
+        <mat-form-field fxFlex  *ngIf="showFieldSearch">
           <mat-label>Lista de Valores</mat-label>
           <mat-select [(ngModel)]="searchValue" >
-            <mat-option *ngFor="let parameter of searchParameter.valueList" [value]="parameter.id">{{parameter.description}} </mat-option>
+            <mat-option *ngFor="let parameter of searchParameter?.valueList" [value]="parameter.id">{{parameter.description}} </mat-option>
           </mat-select>
           <mat-error validationMessage></mat-error>
         </mat-form-field>

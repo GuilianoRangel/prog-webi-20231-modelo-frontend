@@ -89,7 +89,7 @@ export class SearchComponent implements AfterViewInit{
 
   protected readonly SearchType = SearchType;
   get showFieldSearch(): boolean {
-    return !this.searchParameter?.valueList;
+    return !!this.searchParameter?.valueList;
   };
 
   searchAll() {
@@ -104,5 +104,8 @@ export class SearchComponent implements AfterViewInit{
 
   cleanSearch() {
     this.searchValue = '';
+    if(this.showFieldSearch){
+      this.searchConditionKey="EQUAL";
+    }
   }
 }
