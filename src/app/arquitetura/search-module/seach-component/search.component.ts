@@ -101,4 +101,8 @@ export class SearchComponent implements AfterViewInit{
       this.onSearchResult.emit(value);
     },() => this.onSearchResult.emit([]) );
   }
+
+  cleanSearch() {
+    this.searchValue = '';
+  }
 }

@@ -4,7 +4,7 @@
       <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="5">
         <mat-form-field fxFlex="20">
           <mat-label>Campo</mat-label>
-          <mat-select [(ngModel)]="searchParameter" >
+          <mat-select [(ngModel)]="searchParameter" (ngModelChange)="cleanSearch()">
             <mat-option *ngFor="let parameter of searchFieldsParamters" [value]="parameter">{{parameter.label}}</mat-option>
           </mat-select>
           <mat-error validationMessage></mat-error>
