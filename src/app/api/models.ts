@@ -19,7 +19,7 @@ export { AmigoDto } from './models/amigo-dto';
 export { SearchFieldValue } from './models/search-field-value';
 export { AuthDto } from './models/auth-dto';
 export { FiltroUsuarioDto } from './models/filtro-usuario-dto';
-export { ISearchFieldData } from './models/i-search-field-data';
+export { ISearchFieldDataObject } from './models/i-search-field-data-object';
 export { SearchField } from './models/search-field';
 export { ModuloSistemaDto } from './models/modulo-sistema-dto';
 export { FiltroGrupoDto } from './models/filtro-grupo-dto';

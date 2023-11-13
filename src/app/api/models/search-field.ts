@@ -1,9 +1,9 @@
 /* tslint:disable */
 /* eslint-disable */
-import { ISearchFieldData } from './i-search-field-data';
+import { ISearchFieldDataObject } from './i-search-field-data-object';
 export interface SearchField {
   label?: string;
   name?: string;
   type?: string;
-  valueList?: Array<ISearchFieldData>;
+  valueList?: Array<ISearchFieldDataObject>;
 }
