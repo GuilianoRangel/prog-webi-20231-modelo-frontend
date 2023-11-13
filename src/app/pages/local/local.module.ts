@@ -19,6 +19,7 @@ import { ChaveQrcodeComponent } from './gerenciar-local/chave/chave-qrcode/chave
 import { ResponsabilidadeComponent } from './gerenciar-local/responsabilidade/responsabilidade.component';
 import {DateFnsModule} from "ngx-date-fns";
 import { ResponsavelDialogComponent } from './gerenciar-local/responsabilidade/responsavel-dialog/responsavel-dialog.component';
+import {SearchModule} from "../../arquitetura/search-module/search.module";
 
 
 @NgModule({
@@ -42,7 +43,8 @@ import { ResponsavelDialogComponent } from './gerenciar-local/responsabilidade/r
         ValidationModule,
         TipoModule,
         QRCodeModule,
-        DateFnsModule
+        DateFnsModule,
+        SearchModule
     ],
   exports: [
     ChaveComponent

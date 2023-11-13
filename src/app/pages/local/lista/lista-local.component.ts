@@ -49,4 +49,8 @@ export class ListaLocalComponent extends BaseComponent<LocalDto> implements OnIn
   pesquisar(filtroDTO: any) {
 
   }
+
+  showResult($event: any[]) {
+    this.dataSource.data = $event;
+  }
 }

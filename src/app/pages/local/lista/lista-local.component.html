@@ -14,30 +14,15 @@
 
   <mat-card>
     <!--<mat-card-title>Locais Cadastrados</mat-card-title>-->
-    <mat-card-content fxLayout="column">
+    <mat-card-content fxLayout="column" fxFlex>
       <div fxLayout="row" fxFlexAlign="space-between" fxLayoutAlign.gt-xs="center center" fxLayout.lt-sm="column">
-        <div fxFlex="75" fxFlex.lt-sm="100">
+        <div fxFlex="80px" fxFlex.lt-sm="100">
           <div fxFlex="80px">
             <img height="75" src="assets/sharedkeys/botao-locais2-transparent.png" alt="Locais">
           </div>
-          <mat-form-field fxFlex>
-            <mat-label>Local</mat-label>
-            <input matInput placeholder="Informe o Nome" title="Nome"
-                    maxlength="100">
-          </mat-form-field>
         </div>
-        <div fxLayout="row" fxFlex="20" fxLayoutAlign="end center">
-          <div fxFlex="100" fxFlexAlign="space-between" fxLayoutAlign="end center">
-            <button fxFlex fxFlexOffset="1" type="submit" title="Limpar" (click)="limpar()"
-                    mat-button mat-raised-button class="mat-warn">
-              <span>Limpar</span>
-            </button>
-            <button fxFlex fxFlexOffset="1" type="submit" title="Pesquisar"
-                    (click)="pesquisar(filtroDTO)"
-                    mat-button mat-raised-button class="mat-primary">
-              <span>Pesquisar</span>
-            </button>
-          </div>
+        <div fxLayout="row" fxFlex fxLayoutAlign="end center" fxFlex fxFlex.lt-sm="100">
+          <app-search-component [controller]="localService"  (onSearchResult)="showResult($event)"/>
         </div>
       </div>
     </mat-card-content>
