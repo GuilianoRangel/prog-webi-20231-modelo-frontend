@@ -12,18 +12,15 @@
     </div>
   </div>
 
-  <mat-card>
+  <mat-card fxFlex>
     <!--<mat-card-title>Locais Cadastrados</mat-card-title>-->
-    <mat-card-content fxLayout="column" fxFlex>
-      <div fxLayout="row" fxFlexAlign="space-between" fxLayoutAlign.gt-xs="center center" fxLayout.lt-sm="column">
-        <div fxFlex="80px" fxFlex.lt-sm="100">
-          <div fxFlex="80px">
-            <img height="75" src="assets/sharedkeys/botao-locais2-transparent.png" alt="Locais">
-          </div>
+    <mat-card-content fxFlex>
+      <div fxFlex="100" fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="5">
+        <div fxFlex="none">
+          <img height="75" src="assets/sharedkeys/botao-locais2-transparent.png" alt="Locais">
         </div>
-        <div fxLayout="row" fxFlex fxLayoutAlign="end center" fxFlex fxFlex.lt-sm="100">
-          <app-search-component [controller]="localService"  (onSearchResult)="showResult($event)"/>
-        </div>
+          <app-search-component fxFlex [controller]="localService"  (onSearchResult)="showResult($event)"/>
+
       </div>
     </mat-card-content>
   </mat-card>

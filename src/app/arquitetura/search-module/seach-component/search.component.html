@@ -1,51 +1,63 @@
 <div fxFlex="100">
-<mat-card>
-  <mat-card-title>Busca Dados</mat-card-title>
-  <mat-card-content fxFlex>
-    <div fxFlex fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="5">
-        <div fxFlex="40" fxFlex.lt-sm="100" fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="5">
-          <mat-form-field >
-            <mat-label>Campo</mat-label>
-            <mat-select [(ngModel)]="searchParameter" (ngModelChange)="cleanSearch()">
-              <mat-option *ngFor="let parameter of searchFieldsParamters" [value]="parameter">{{parameter.label}}</mat-option>
-            </mat-select>
-            <mat-error validationMessage></mat-error>
-          </mat-form-field>
-          <mat-form-field>
-            <mat-label>Condição</mat-label>
-            <mat-select [(ngModel)]="searchConditionKey" >
-              <mat-option *ngFor="let parameter of searchConditionKeys" [value]="parameter">{{SearchType[parameter]}} </mat-option>
-            </mat-select>
-            <mat-error validationMessage></mat-error>
-          </mat-form-field>
+  <form
+    [formGroup]="formGroup"
+    (ngSubmit)="search()"
+    class="form"
+  >
+    <mat-card fxFlex>
+      <mat-card-title>Busca Dados</mat-card-title>
+      <mat-card-content fxFlex>
+        <div fxFlex fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="5">
+            <div fxFlex="40" fxFlex.lt-sm="100" fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="5">
+              <mat-form-field fxFlex>
+                <mat-label>Campo</mat-label>
+                <mat-select formControlName="searchParameter">
+                  <mat-option *ngFor="let parameter of searchFieldsParamters" [value]="parameter">{{parameter.label}}</mat-option>
+                </mat-select>
+                <mat-error validationMessage></mat-error>
+              </mat-form-field>
+              <mat-form-field fxFlex>
+                <mat-label>Condição</mat-label>
+                <mat-select formControlName="searchConditionKey" >
+                  <mat-option *ngFor="let parameter of searchConditionKeys" [value]="parameter">{{SearchType[parameter]}} </mat-option>
+                </mat-select>
+                <mat-error validationMessage></mat-error>
+              </mat-form-field>
+            </div>
+            <div fxFlex="60" fxFlex.lt-sm="100" fxLayout="row" fxLayout.lt-sm="column" >
+              <mat-form-field fxFlex *ngIf="!showFieldSearch">
+                <mat-label>Busca</mat-label>
+                <input matInput placeholder="Informe o valor da busca" title="Busca"
+                       formControlName="searchValue" name="nome"  required maxlength="50"
+                >
+                <mat-error validationMessage ></mat-error>
+              </mat-form-field>
+              <mat-form-field  fxFlex  *ngIf="showFieldSearch">
+                <mat-label>Lista de Valores</mat-label>
+                <input type="text"
+                       placeholder="Digite para filtrar"
+                       aria-label="Lista de Valores."
+                       matInput
+                       formControlName="searchValue"
+                       [matAutocomplete]="auto">
+                <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" [displayWith]="getSearchValueDescription">
+                  <mat-option *ngFor="let option of searchParameterFiltered | async" [value]="option">{{option.description}}</mat-option>
+                </mat-autocomplete>
+                <mat-error validationMessage></mat-error>
+              </mat-form-field>
+            </div>
         </div>
-        <div fxFlex="60" fxFlex.lt-sm="100" fxLayout="row" fxLayout.lt-sm="column" >
-          <mat-form-field fxFlex *ngIf="!showFieldSearch">
-            <mat-label>Busca</mat-label>
-            <input matInput placeholder="Informe o valor da busca" title="Busca"
-                   [(ngModel)]="searchValue" name="nome"  required maxlength="50"
-            >
-            <mat-error validationMessage ></mat-error>
-          </mat-form-field>
-          <mat-form-field  fxFlex  *ngIf="showFieldSearch">
-            <mat-label>Lista de Valores</mat-label>
-            <mat-select [(ngModel)]="searchValue" >
-              <mat-option *ngFor="let parameter of searchParameter?.valueList" [value]="parameter.id">{{parameter.description}} </mat-option>
-            </mat-select>
-            <mat-error validationMessage></mat-error>
-          </mat-form-field>
+      </mat-card-content>
+      <mat-card-actions >
+        <div fxFlex="20" fxFlex.lt-sm="100"
+             fxLayout.lt-sm="column" fxLayout="row"
+             fxLayoutAlign="space-between center" fxLayoutAlign.lt-sm="space-around stretch"
+             fxLayoutGap="5"
+        >
+          <button mat-button mat-raised-button class="mat-primary" (click)="searchAll()">Todos</button>
+          <button mat-button mat-raised-button class="mat-primary" (click)="search()" type="submit">Busca</button>
         </div>
-    </div>
-  </mat-card-content>
-  <mat-card-actions >
-    <div fxFlex="20" fxFlex.lt-sm="100"
-         fxLayout.lt-sm="column" fxLayout="row"
-         fxLayoutAlign="space-between center" fxLayoutAlign.lt-sm="space-around stretch"
-         fxLayoutGap="5"
-    >
-      <button mat-button mat-raised-button class="mat-primary" (click)="searchAll()">Todos</button>
-      <button mat-button mat-raised-button class="mat-primary" (click)="search()">Busca</button>
-    </div>
-  </mat-card-actions>
-</mat-card>
+      </mat-card-actions>
+    </mat-card>
+  </form>
 </div>

@@ -49,7 +49,14 @@
     </button>
   </mat-sidenav>
   <mat-sidenav-content>
-    <div class="content mat-elevation-z8">
+    <div class="content mat-elevation-z8"
+         fxFlex.gt-xs="{{ FX_FLEX_GT_XS }}"
+         fxFlex.gt-sm="{{ FX_FLEX_GT_SM }}"
+         fxFlex.gt-md="{{ FX_FLEX_GT_MD }}"
+         fxFlex.gt-lg="{{ FX_FLEX_GT_LG }}"
+         fxFlex.xl="{{ FX_FLEX_XL }}"
+         fxLayout="column"
+         fxFlexAlign="start center">
         <router-outlet></router-outlet>
     </div>
   </mat-sidenav-content>

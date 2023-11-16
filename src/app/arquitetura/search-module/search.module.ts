@@ -1,10 +1,13 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {AsyncPipe, CommonModule} from '@angular/common';
 import {SearchComponent} from "./seach-component/search.component";
 import {SearchService} from "./shared/search.service";
 import {MaterialModule} from "../../core/material.module";
 import {ValidationModule} from "../../adminmodule/shared/validation/validation.module";
-import {ReactiveFormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {MatFormFieldModule} from "@angular/material/form-field";
+import {MatInputModule} from "@angular/material/input";
+import {MatAutocompleteModule} from "@angular/material/autocomplete";
 
 
 
@@ -16,7 +19,13 @@ import {ReactiveFormsModule} from "@angular/forms";
     CommonModule,
     MaterialModule,
     ReactiveFormsModule,
-    ValidationModule
+    ValidationModule,
+    FormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatAutocompleteModule,
+    ReactiveFormsModule,
+    AsyncPipe,
   ]
 })
 export class SearchModule { }
