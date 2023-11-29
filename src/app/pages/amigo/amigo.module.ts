@@ -19,6 +19,7 @@ import {MatNativeDateModule} from "@angular/material/core";
 import {ValidationModule} from "../../adminmodule/shared/validation/validation.module";
 import {TipoResolve} from "./shared/tipo-resolve.service";
 import {SearchModule} from "../../arquitetura/search-module/search.module";
+import {MaterialModule} from "../../core/material.module";
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import {SearchModule} from "../../arquitetura/search-module/search.module";
         MatDatepickerModule,
         MatNativeDateModule,
         ValidationModule,
-        SearchModule
+        SearchModule,
+        MaterialModule
     ],
   providers: [
     TipoResolve
