@@ -9,6 +9,7 @@ import { RequestBuilder } from '../request-builder';
 import { Observable } from 'rxjs';
 import { map, filter } from 'rxjs/operators';
 
+import { Pageable } from '../models/pageable';
 import { SearchField } from '../models/search-field';
 import { SearchFieldValue } from '../models/search-field-value';
 import { TipoDto } from '../models/tipo-dto';
@@ -478,6 +479,69 @@ export class TipoControllerService extends BaseService {
   }
 
   /**
+   * Path part for operation tipoControllerSearchFieldsActionPage
+   */
+  static readonly TipoControllerSearchFieldsActionPagePath = '/api/v1/tipo/search-fields/page';
+
+  /**
+   * Realiza a busca pelos valores dos campos informados
+   *
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `tipoControllerSearchFieldsActionPage()` instead.
+   *
+   * This method sends `application/json` and handles request body of type `application/json`.
+   */
+  tipoControllerSearchFieldsActionPage$Response(params: {
+    body: {
+'searchFieldValues'?: Array<SearchFieldValue>;
+'page'?: Pageable;
+}
+  },
+  context?: HttpContext
+
+): Observable<StrictHttpResponse<any>> {
+
+    const rb = new RequestBuilder(this.rootUrl, TipoControllerService.TipoControllerSearchFieldsActionPagePath, 'post');
+    if (params) {
+      rb.body(params.body, 'application/json');
+    }
+
+    return this.http.request(rb.build({
+      responseType: 'json',
+      accept: 'application/json',
+      context: context
+    })).pipe(
+      filter((r: any) => r instanceof HttpResponse),
+      map((r: HttpResponse<any>) => {
+        return r as StrictHttpResponse<any>;
+      })
+    );
+  }
+
+  /**
+   * Realiza a busca pelos valores dos campos informados
+   *
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `tipoControllerSearchFieldsActionPage$Response()` instead.
+   *
+   * This method sends `application/json` and handles request body of type `application/json`.
+   */
+  tipoControllerSearchFieldsActionPage(params: {
+    body: {
+'searchFieldValues'?: Array<SearchFieldValue>;
+'page'?: Pageable;
+}
+  },
+  context?: HttpContext
+
+): Observable<any> {
+
+    return this.tipoControllerSearchFieldsActionPage$Response(params,context).pipe(
+      map((r: StrictHttpResponse<any>) => r.body as any)
+    );
+  }
+
+  /**
    * Path part for operation tipoControllerAtivarTipo
    */
   static readonly TipoControllerAtivarTipoPath = '/api/v1/tipo/{id}/ativar';
@@ -531,6 +595,63 @@ export class TipoControllerService extends BaseService {
 
     return this.tipoControllerAtivarTipo$Response(params,context).pipe(
       map((r: StrictHttpResponse<TipoDto>) => r.body as TipoDto)
+    );
+  }
+
+  /**
+   * Path part for operation tipoControllerListAllPage
+   */
+  static readonly TipoControllerListAllPagePath = '/api/v1/tipo/page';
+
+  /**
+   * Listagem Geral paginada
+   *
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `tipoControllerListAllPage()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  tipoControllerListAllPage$Response(params: {
+    page: Pageable;
+  },
+  context?: HttpContext
+
+): Observable<StrictHttpResponse<any>> {
+
+    const rb = new RequestBuilder(this.rootUrl, TipoControllerService.TipoControllerListAllPagePath, 'get');
+    if (params) {
+      rb.query('page', params.page, {});
+    }
+
+    return this.http.request(rb.build({
+      responseType: 'json',
+      accept: 'application/json',
+      context: context
+    })).pipe(
+      filter((r: any) => r instanceof HttpResponse),
+      map((r: HttpResponse<any>) => {
+        return r as StrictHttpResponse<any>;
+      })
+    );
+  }
+
+  /**
+   * Listagem Geral paginada
+   *
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `tipoControllerListAllPage$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  tipoControllerListAllPage(params: {
+    page: Pageable;
+  },
+  context?: HttpContext
+
+): Observable<any> {
+
+    return this.tipoControllerListAllPage$Response(params,context).pipe(
+      map((r: StrictHttpResponse<any>) => r.body as any)
     );
   }
 

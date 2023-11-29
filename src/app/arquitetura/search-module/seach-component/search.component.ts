@@ -1,6 +1,6 @@
 import {AfterViewInit, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {SearchFieldValue} from "../../../api/models/search-field-value";
-import {Observable, startWith} from "rxjs";
+import {debounceTime, distinctUntilChanged, Observable, of, startWith, switchMap} from "rxjs";
 import {SearchField} from "../../../api/models/search-field";
 import {SearchType, SearchTypeKey} from "../shared/search-type";
 import {ActivatedRoute, Router} from "@angular/router";
@@ -10,7 +10,7 @@ import {MatDialog} from "@angular/material/dialog";
 import {AsyncPipe} from '@angular/common';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MessageService} from "../../message/message.service";
-import {map} from "rxjs/operators";
+import {catchError, map} from "rxjs/operators";
 import {ISearchFieldDataObject} from "../../../api/models/i-search-field-data-object";
 
 @Component({
@@ -94,17 +94,45 @@ export class SearchComponent implements AfterViewInit, OnInit{
   ngOnInit(): void {
     this.searchParameterFiltered = this.formGroup.controls['searchValue'].valueChanges.pipe(
       startWith(''),
-      map(value => {
+      debounceTime(400),
+      distinctUntilChanged(),
+      switchMap(value => {
         const name = typeof value === 'string' ? value : value?.description;
-        return name ? this._filter(name as string) : this.getFieldSearchParameter()?.valueList?.slice();
+        if(this.getFieldSearchParameter().autoComplete == true){
+          return name ? this._filterService(name as string) : of([]);
+        } else {
+          return name ? of(this._filter(name as string)) : of(this.getFieldSearchParameter()?.valueList?.slice());
+        }
       }),
     );
   }
 
   private _filter(value: string): Array<ISearchFieldDataObject> {
     const filterValue = value.toLowerCase();
-
     return this.getFieldSearchParameter()?.valueList.filter((option: ISearchFieldDataObject) => option.description?.toLowerCase().includes(filterValue));
+  }
+
+  private _filterService(value: string): Observable<Array<ISearchFieldDataObject>> {
+    const filterValue = value.toLowerCase();
+    if(!this.formGroup.valid || !filterValue || filterValue.length <3) return of([]);
+    return this.searchFieldsActionMethod({body: [
+        { name: this.getFieldSearchParameter().name,
+          searchType:  'BEGINS_WITH',
+          type: this.getFieldSearchParameter().type,
+          value: filterValue}]}
+    ).pipe(
+      map(response => {
+        const result = response.map((value1: any) =>  {
+          return {
+            id: value1[this.getFieldSearchParameter().name],
+            description: value1[this.getFieldSearchParameter().name]
+          }
+        });
+        return result;}
+      ),catchError( (err, cauth) => {
+        return of([]);
+      })
+    )
   }
 
   ngAfterViewInit(): void {
@@ -157,7 +185,7 @@ export class SearchComponent implements AfterViewInit, OnInit{
 
   protected readonly SearchType = SearchType;
   get showFieldSearch(): boolean {
-    let b = !!this.formGroup.controls['searchParameter']?.value?.valueList;
+    let b = (!!this.formGroup.controls['searchParameter']?.value?.valueList) || this.getFieldSearchParameter()?.autoComplete == true ;
     return b
   };
 
@@ -166,7 +194,7 @@ export class SearchComponent implements AfterViewInit, OnInit{
         { name: this.searchFieldsParamters[0].name,
           searchType:  'ALL',
           type: this.searchFieldsParamters[0].type,
-          value: ''}]}).subscribe(value => {
+          value: 'ALL'}]}).subscribe(value => {
       this.onSearchResult.emit(value);
     },() => this.onSearchResult.emit([]) );
   }

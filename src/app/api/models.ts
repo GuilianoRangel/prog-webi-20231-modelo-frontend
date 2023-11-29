@@ -17,6 +17,7 @@ export { CredencialDto } from './models/credencial-dto';
 export { UsuarioSenhaDto } from './models/usuario-senha-dto';
 export { AmigoDto } from './models/amigo-dto';
 export { SearchFieldValue } from './models/search-field-value';
+export { Pageable } from './models/pageable';
 export { AuthDto } from './models/auth-dto';
 export { FiltroUsuarioDto } from './models/filtro-usuario-dto';
 export { ISearchFieldDataObject } from './models/i-search-field-data-object';
