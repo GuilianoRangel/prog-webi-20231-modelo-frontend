@@ -1,4 +1,4 @@
-<app-search-component [controller]="service"  (onSearchResult)="showResult($event)"/>
+<app-search-component [controller]="service" (onSearchClick)="updateSearchValue($event)" [doSearch]="false"/>
 <section class="example-container mat-elevation-z8" tabindex="0">
   <table mat-table [dataSource]="amigoListaDataSource">
 
@@ -36,7 +36,7 @@
     <tr mat-header-row *matHeaderRowDef="colunasMostrar; sticky: true"></tr>
     <tr mat-row *matRowDef="let row; columns: colunasMostrar;"></tr>
   </table>
-  <mat-paginator #paginator [length]="totalRows" [pageIndex]="currentPage" [pageSize]="pageSize"
-                 [pageSizeOptions]="pageSizeOptions" (page)="pageChanged($event)" aria-label="Select page">
+  <mat-paginator #paginator [length]="totalRows" [pageSize]="pageSize"
+                 [pageSizeOptions]="pageSizeOptions"  aria-label="Select page">
   </mat-paginator>
 </section>
