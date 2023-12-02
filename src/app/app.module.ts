@@ -26,6 +26,8 @@ import {QRCodeModule} from "angularx-qrcode";
 import { registerLocaleData } from '@angular/common';
 import localeBr from '@angular/common/locales/pt';
 import { DateFnsModule } from 'ngx-date-fns';
+import {MatPaginatorIntl} from "@angular/material/paginator";
+import {getPtBrPaginatorIntl} from "./arquitetura/component/portuguese-mat-paginator-intl";
 
 @NgModule({
   declarations: [
@@ -73,7 +75,10 @@ import { DateFnsModule } from 'ngx-date-fns';
     },
     {
       provide: LOCALE_ID, useValue: 'pt'
-    }
+    },
+    {
+      provide: MatPaginatorIntl, useValue: getPtBrPaginatorIntl()
+    },
   ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
