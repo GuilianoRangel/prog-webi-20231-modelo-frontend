@@ -492,10 +492,10 @@ export class TipoControllerService extends BaseService {
    * This method sends `application/json` and handles request body of type `application/json`.
    */
   tipoControllerSearchFieldsActionPage$Response(params: {
-    body: {
-'searchFieldValues'?: Array<SearchFieldValue>;
-'page'?: Pageable;
-}
+    page?: number;
+    size?: number;
+    sort?: Array<string>;
+    body: Array<SearchFieldValue>
   },
   context?: HttpContext
 
@@ -503,6 +503,9 @@ export class TipoControllerService extends BaseService {
 
     const rb = new RequestBuilder(this.rootUrl, TipoControllerService.TipoControllerSearchFieldsActionPagePath, 'post');
     if (params) {
+      rb.query('page', params.page, {});
+      rb.query('size', params.size, {});
+      rb.query('sort', params.sort, {});
       rb.body(params.body, 'application/json');
     }
 
@@ -527,10 +530,10 @@ export class TipoControllerService extends BaseService {
    * This method sends `application/json` and handles request body of type `application/json`.
    */
   tipoControllerSearchFieldsActionPage(params: {
-    body: {
-'searchFieldValues'?: Array<SearchFieldValue>;
-'page'?: Pageable;
-}
+    page?: number;
+    size?: number;
+    sort?: Array<string>;
+    body: Array<SearchFieldValue>
   },
   context?: HttpContext
 

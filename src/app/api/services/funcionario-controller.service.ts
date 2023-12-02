@@ -435,10 +435,10 @@ export class FuncionarioControllerService extends BaseService {
    * This method sends `application/json` and handles request body of type `application/json`.
    */
   funcionarioControllerSearchFieldsActionPage$Response(params: {
-    body: {
-'searchFieldValues'?: Array<SearchFieldValue>;
-'page'?: Pageable;
-}
+    page?: number;
+    size?: number;
+    sort?: Array<string>;
+    body: Array<SearchFieldValue>
   },
   context?: HttpContext
 
@@ -446,6 +446,9 @@ export class FuncionarioControllerService extends BaseService {
 
     const rb = new RequestBuilder(this.rootUrl, FuncionarioControllerService.FuncionarioControllerSearchFieldsActionPagePath, 'post');
     if (params) {
+      rb.query('page', params.page, {});
+      rb.query('size', params.size, {});
+      rb.query('sort', params.sort, {});
       rb.body(params.body, 'application/json');
     }
 
@@ -470,10 +473,10 @@ export class FuncionarioControllerService extends BaseService {
    * This method sends `application/json` and handles request body of type `application/json`.
    */
   funcionarioControllerSearchFieldsActionPage(params: {
-    body: {
-'searchFieldValues'?: Array<SearchFieldValue>;
-'page'?: Pageable;
-}
+    page?: number;
+    size?: number;
+    sort?: Array<string>;
+    body: Array<SearchFieldValue>
   },
   context?: HttpContext
 
