@@ -35,7 +35,7 @@ export class FormTipoComponent {
   }
   createForm() {
     this.formGroup = this.formBuilder.group({
-      nome: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
+      nome: [null, []],//[Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
       dataCriacao: [new Date(), Validators.required],
       status: [null, Validators.required],
     });

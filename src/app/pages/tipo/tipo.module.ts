@@ -17,6 +17,8 @@ import {ReactiveFormsModule} from "@angular/forms";
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from "@angular/material/core";
 import {SearchModule} from "../../arquitetura/search-module/search.module";
+import {MatPaginatorModule} from "@angular/material/paginator";
+import {MaterialModule} from "../../core/material.module";
 
 @NgModule({
   declarations: [
@@ -24,20 +26,22 @@ import {SearchModule} from "../../arquitetura/search-module/search.module";
     HomeTipoComponent,
     FormTipoComponent
   ],
-  imports: [
-    CommonModule,
-    RouterModule.forChild(tipoRoutes),
-    MatCardModule,
-    MatIconModule,
-    MatButtonModule,
-    MatTableModule,
-    MatFormFieldModule,
-    MatSelectModule,
-    MatInputModule,
-    ReactiveFormsModule,
-    MatDatepickerModule,
-    MatNativeDateModule,
-    SearchModule
-  ]
+    imports: [
+        CommonModule,
+        RouterModule.forChild(tipoRoutes),
+        MatCardModule,
+        MatIconModule,
+        MatButtonModule,
+        MatTableModule,
+        MatFormFieldModule,
+        MatSelectModule,
+        MatInputModule,
+        ReactiveFormsModule,
+        MatDatepickerModule,
+        MatNativeDateModule,
+        SearchModule,
+        MatPaginatorModule,
+        MaterialModule
+    ]
 })
 export class TipoModule { }
