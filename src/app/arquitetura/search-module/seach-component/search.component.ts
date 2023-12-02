@@ -21,8 +21,11 @@ import {ISearchFieldDataObject} from "../../../api/models/i-search-field-data-ob
 export class SearchComponent implements AfterViewInit, OnInit{
 
   @Input() controller: any;
+  @Input() doSearch: boolean = true;
   @Output()
   onSearchResult: EventEmitter<any[]> = new EventEmitter<any[]>();
+  @Output()
+  onSearchClick: EventEmitter< SearchFieldValue[]> = new EventEmitter<SearchFieldValue[]>();
 
 
   searchFieldsActionMethod!: (params: {body: Array<SearchFieldValue>})
@@ -69,14 +72,17 @@ export class SearchComponent implements AfterViewInit, OnInit{
     if(!this.formGroup.valid) return;
     let fieldSearchValue = this.getFieldSearchValue();
     fieldSearchValue =  typeof fieldSearchValue === 'string' ? fieldSearchValue : fieldSearchValue.id;
-    this.searchFieldsActionMethod({body: [
+    let searchValues = [
       { name: this.getFieldSearchParameter().name,
         searchType:  this.getFieldSearchConditionKey(),
         type: this.getFieldSearchParameter().type,
-        value: fieldSearchValue}]}).subscribe(value => {
+        value: fieldSearchValue}];
+    this.onSearchClick.emit(searchValues);
+    if(this.doSearch === true){
+      this.searchFieldsActionMethod({body: searchValues}).subscribe(value => {
         this.onSearchResult.emit(value);
-    },() => this.onSearchResult.emit([]) );
-
+      },() => this.onSearchResult.emit([]) );
+    }
   }
 
   private getFieldSearchValue() {
